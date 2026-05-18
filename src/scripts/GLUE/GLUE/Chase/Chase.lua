@@ -23,14 +23,6 @@ local oppositeDir = {
     ["in"] = "out", out = "in",
 }
 
-local function dirBlocked(dir)
-    if not Legacy or not Legacy.Room or not Legacy.Room.Walls then return false end
-    local walls = Legacy.Room.Walls
-    local full  = Legacy.Room.directionTable and Legacy.Room.directionTable[dir] or dir
-    return table.contains(walls.Ice,   dir)  or table.contains(walls.Ice,   full)
-        or table.contains(walls.Stone, dir)  or table.contains(walls.Stone, full)
-end
-
 -- Build exits sorted by destination connectivity (most connected = most likely fled direction).
 local function sortedExitDirs()
     local exits = getRoomExits(gmcp.Room.Info.num) or {}
@@ -46,18 +38,6 @@ local function sortedExitDirs()
     return result
 end
 
-local function targetPresentHere()
-    local players = gmcp.Room and gmcp.Room.Players or {}
-    for _, p in ipairs(players) do
-        if p.name == GLUE.target.name then return true end
-    end
-    if ra and ra.InRoom then
-        for _, name in ipairs(ra.InRoom) do
-            if name == GLUE.target.name then return true end
-        end
-    end
-    return false
-end
 
 local function killSquintTrigger()
     if C._squintTempID then
@@ -170,7 +150,7 @@ end
 -- Returns the movement prefix to prepend to an attack command, or nil if not chasing.
 function GLUE.chase.GetPrefix()
     if C.disabled or not C.direction then return nil end
-    local move = dirBlocked(C.direction) and ("leap " .. C.direction) or C.direction
+    local move = GLUE.integration.IsDirBlocked(C.direction) and ("leap " .. C.direction) or C.direction
     return move .. "/squint " .. C.direction
 end
 
@@ -180,7 +160,7 @@ local function onRoomInfo()
     local roomNum = tonumber(gmcp.Room.Info.num)
 
     -- Target found here — stop all chasing
-    if targetPresentHere() then
+    if GLUE.integration.IsTargetInRoom(GLUE.target.name) then
         C.direction = nil
         C.fromRoom  = nil
         C.toRoom    = nil
@@ -194,7 +174,7 @@ local function onRoomInfo()
         if C.toRoom == roomNum then
             C.toRoom = nil
             tempTimer(0, function()
-                if targetPresentHere() then
+                if GLUE.integration.IsTargetInRoom(GLUE.target.name) then
                     C.direction = nil
                     C.fromRoom  = nil
                     resetLocate()
@@ -208,7 +188,7 @@ local function onRoomInfo()
     end
 
     -- Followed chase direction into this room — squint already in-flight from prefix
-    if C.direction and (not targetPresentHere()) then
+    if C.direction and (not GLUE.integration.IsTargetInRoom(GLUE.target.name)) then
         local exits = getRoomExits(roomNum) or {}
         local dir = C.direction
         C.direction = nil

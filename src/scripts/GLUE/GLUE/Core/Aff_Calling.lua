@@ -1,15 +1,9 @@
 function curingPaused()
-  if not Legacy or not Legacy.Settings or not Legacy.Curing then return false end
-  if Legacy.Settings.Curing.status ~= nil and Legacy.Settings.Curing.status == true then
-    return false
-  else
-    return true
-  end
+  return GLUE.integration.IsCuringPaused()
 end
 
 function inRet()
-  if not Legacy or not Legacy.Curing or not Legacy.Curing.Affs then return false end
-  return (Legacy.Curing.Affs.retardation or Legacy.Curing.Affs.aeon)
+  return GLUE.integration.IsTimeDistorted()
 end
 
 function pt(message)
@@ -62,7 +56,7 @@ affBuffer = {}
 GLUE.OnAffGiven = function(aff)
   if callAfflictions
     and reportAffs
-    and not (Legacy.Curing.Affs.retardation or Legacy.Curing.Affs.aeon)
+    and not GLUE.integration.IsTimeDistorted()
     and not doNotCallAffs[aff] then
 
       table.insert(affBuffer, aff)

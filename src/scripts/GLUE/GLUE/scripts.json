@@ -6,6 +6,12 @@
               "isFolder": "no"
        },
        {
+              "name": "Integrations",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "yes"
+       },
+       {
               "name": "Core",
               "isActive": "yes",
               "script": "",

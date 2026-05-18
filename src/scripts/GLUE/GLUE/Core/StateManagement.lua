@@ -104,8 +104,8 @@ function GLUE.state.AddAffliction(affliction, addToRoom)
         return false
     end
 
-    if addToRoom and ra and ra.InRoom and GLUE.target.name and GLUE.target.name ~= "" then
-        table.insert(ra.InRoom, GLUE.target.name)
+    if addToRoom and GLUE.target.name and GLUE.target.name ~= "" then
+        GLUE.integration.AddTargetToRoom(GLUE.target.name)
     end
 
     for _, state in ipairs(GLUE.state.states) do

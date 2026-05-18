@@ -189,14 +189,7 @@ GLUE.huff.Register(function()
 
     -- If the target is not in the room, we can't observe cures.
     -- Simulate a passive cure every 2s instead of pruning on balance timers.
-    local targetInRoom = false
-    if GLUE.target.name ~= "" and ra and ra.InRoom then
-        for _, name in ipairs(ra.InRoom) do
-            if name == GLUE.target.name then targetInRoom = true; break end
-        end
-    else
-        targetInRoom = true
-    end
+    local targetInRoom = GLUE.target.name == "" or GLUE.integration.IsTargetInRoom(GLUE.target.name)
     if not targetInRoom then
         GLUE.state.RemoveAffliction("prone")
         GLUE.state.RemoveAffliction("paralysis")
