@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Muddle
+        uses: demonnic/build-with-muddler@v1.4
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ElmerCombatGLUE.mpackage
+          path: build/*.mpackage
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.sha }}
+          tag_name: ${{ github.sha }}
+          draft: false
+          prerelease: false
+          files: build/ElmerCombatGLUE.mpackage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
