@@ -27,8 +27,8 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ github.sha }}
-          tag_name: ${{ github.sha }}
+          name: ${{ github.run_number }}
+          tag_name: v${{ github.run_number }}
           draft: false
           prerelease: false
           files: build/ElmerCombatGLUE.mpackage
