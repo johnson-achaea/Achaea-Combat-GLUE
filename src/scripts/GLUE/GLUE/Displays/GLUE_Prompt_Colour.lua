@@ -17,7 +17,7 @@ function getColoredGLUEAffs()
     local prob = GLUE.state.GetProbability(aff)
     if prob >= 5 then
       local col  = GLUE.affs.colorMap[aff] or "cyan"
-      local name = (Legacy.Curing.abbreviations and Legacy.Curing.abbreviations[aff]) or aff
+      local name = GLUE.integration.GetAfflictionAbbrev(aff)
       if GLUE.affs.stackable and GLUE.affs.stackable[aff] then
         local stacks = GLUE.state.GetMaxStacks(aff)
         if stacks > 1 then
@@ -42,7 +42,14 @@ function getColoredGLUEAffs()
   end
 
   if #glueAffs > 0 then
-    echo("\n")
-    cecho(table.concat(glueAffs, " "))
+    return table.concat(glueAffs, " ")
+  end
+  return ""
+end
+
+function echoColoredGLUEAffs()
+  local s = getColoredGLUEAffs()
+  if s and s ~= "" then
+    cecho(s)
   end
 end
