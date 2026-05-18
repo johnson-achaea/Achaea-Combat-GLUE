@@ -1,6 +1,6 @@
 [
        {
-              "name": "ItemDB",
+              "name": "ItemDB_Core",
               "isActive": "yes",
               "script": "",
               "isFolder": "no"
