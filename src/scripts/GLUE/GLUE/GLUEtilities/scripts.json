@@ -1,0 +1,20 @@
+[
+       {
+              "name": "RoomSearch",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "ItemDB",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "yes"
+       },
+       {
+              "name": "Exploration",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "yes"
+       }
+]

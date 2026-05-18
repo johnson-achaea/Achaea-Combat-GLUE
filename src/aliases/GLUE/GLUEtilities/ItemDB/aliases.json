@@ -1,0 +1,30 @@
+[
+       {
+              "name": "ItemDB",
+              "isActive": "yes",
+              "regex": "^itemdb (toggle|save|load|validate)$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Find Item",
+              "isActive": "yes",
+              "regex": "^finditem (\\S+) (.+)$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Item Where",
+              "isActive": "yes",
+              "regex": "^itemwhere (.+)$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Item Visit",
+              "isActive": "yes",
+              "regex": "^itemvisit (.+)$",
+              "script": "",
+              "isFolder": "no"
+       }
+]

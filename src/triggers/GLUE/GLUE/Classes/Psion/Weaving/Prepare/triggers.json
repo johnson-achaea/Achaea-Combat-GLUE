@@ -1,0 +1,110 @@
+[
+       {
+              "name": "Disruption",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Lightning explodes from your weapon as it smashes into ([\\w'\\-]+), \\w+ body locking up in agony as it rips through \\w+\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Lightning explodes from your blade as you hack into ([\\w'\\-]+), \\w+ body locking up as the current rips through \\w+\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Laceration",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^The spikes adorning your [\\w'\\-]+ tear bloody furrows in the flesh of ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Your blade tears into ([\\w'\\-]+), a spray of crimson exploding from the wound as your weapon strikes bone\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Dazzle",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^As your weapon strikes ([\\w'\\-]+) a brilliant flash of light explodes forth\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Rattle",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^As your weapon strikes ([\\w'\\-]+), power blasts outward in a concussive wave\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Vapours",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^As your weapon strikes ([\\w'\\-]+) a wave of cloying vapours rolls over \\w+\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       }
+]

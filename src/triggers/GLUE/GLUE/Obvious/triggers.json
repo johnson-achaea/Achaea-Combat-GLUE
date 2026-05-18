@@ -1,0 +1,1355 @@
+[
+       {
+              "name": "Force Fly",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^The guardian angel of \\w+ lifts an arm to point at you, and you suddenly find the ground vanishing beneath you as you float upwards and away\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Stupidty",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Tears fill ([\\w'\\-]+)'s eyes and begin to slowly run down ([\\w'\\-]+) face\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) flaps ([\\w'\\-]+) arms madly\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) stumbles and pokes ([\\w'\\-]+) in the eye\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) makes a strangled meowing noise and quickly shuts up, blushing\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) picks ([\\w'\\-]+) nose absently\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) breaks down and sobs uncontrollably\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) gets down on one knee and serenades the world\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) falls to his knees in worship\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) hugs \\w+ compassionately\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) grunts a bit and then lets out a loud \\\"OINK\\!\\\"$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) waggles his eyebrows comically\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) wails like an old woman\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) moans, holding his head\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You cast a net of stupidity over ([\\w'\\-]+)'s mind\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) twitches spasmodically\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) fondles \\w+ absently\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) lets out a loud\\, long \\\"MOOOOOOOOOOO\\!\\\"$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) attempts to do a standing backflip\\, but merely stumbles over [\\w'\\-]+ own feet\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Impatience",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) shuffles ([\\w'\\-]+) feet in boredom\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) suddenly starts scratching at an itch like mad\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You glare at ([\\w'\\-]+)\\, cursing ([\\w'\\-]+) with mental maladies\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^His eyes gleaming\\, [\\w'\\-]+ smiles and quickly sings a jaunty limerick at ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Her eyes gleaming\\, [\\w'\\-]+ smiles and quickly sings a jaunty limerick at ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Trample",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) screams as \\w+ ([\\w'\\-]+) ([\\w'\\-]+) is crushed\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Asleep",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+)'s eyes close suddenly as \\w+ falls asleep\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) tosses back and forth in restless slumber\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Target Standing",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) stands up\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) rolls smoothly back to [\\w'\\-]+ feet\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) backs away and out of your reach\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) pushes off the ground, coming back up into a guard position\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Darkshade",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) stiffens suddenly, \\w+ features a masque frozen in agony\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) lets out a piercing scream, as if wounded by the very sunlight\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Awake",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) wakes up with a gasp of pain\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) opens \\w+ eyes and stretches languidly, a smile on \\w+ face\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) opens \\w+ eyes and yawns mightily\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) awakens with a start\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) opens [\\w'\\-]+ eyes and yawns mightily\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Prone",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Sweeping out with a blade hand, [\\w'\\-]+l strikes at the back of ([\\w'\\-]+)'s knee\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Drawing an enormous breath\\, [\\w'\\-]+ exhales\\, expelling a gale of wind with such force that ([\\w'\\-]+) is knocked over\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) is knocked forcefully off \\w+ feet by the impact of [\\w'\\-]+\\'s huge tail\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+)\\'s eyes close suddenly as \\w+ falls asleep\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) is knocked off \\w+ feet by the heaving ground\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^[\\w'\\-]+ throws \\w+ palms forward, releasing a stream of deadly blue light to cripple ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Drawing an enormous breath, you exhale, expelling a gale of wind with such force that ([\\w'\\-]+) is ",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "([\\w'\\-]+) is knocked forcefully off \\w+ feet by the impact of your huge tail\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You hear two loud snaps and see ([\\w'\\-]+) fall to the ground\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You knock the legs out from under ([\\w'\\-]+) and send \\w+ sprawling\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You duck low and smash your shield into the knees of ([\\w'\\-]+)\\, causing them to buckle underneath \\w+\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Stepping forward, you grab the useless .* of ([\\w'\\-]+), wrench \\w+ violently forward, and throw \\w+ to the ground\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You lunge downward, slamming the edge of .+ into the shins of ([\\w'\\-]+)\\.",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You swiftly sweep ([\\w'\\-]+) feet out from beneath",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^An .* tangles itself in the legs of ([\\w'\\-]+)\\, sending \\w+ sprawling to the ground\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^A .* tangles itself in the legs of ([\\w'\\-]+)\\, sending \\w+ sprawling to the ground\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Dropping into a low crouch\\, you expertly tangle .* with the legs of ([\\w'\\-]+)\\, sending [\\w'\\-]+ sprawling\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^The staff sweeps the legs out from under ([\\w'\\-]+)\\, sending [\\w'\\-]+ sprawling\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^The instep of your foot smashes into the [\\w'\\-]+ underarm of ([\\w'\\-]+)\\, throwing [\\w'\\-]+ from [\\w'\\-]+ feet and sending [\\w'\\-]+ spinning to the ground\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^[\\w'\\-]+ drops low\\, tangling .+ with the legs of ([\\w'\\-]+) and sending [\\w'\\-]+ sprawling\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^[\\w'\\-]+ drops to the floor and sweeps [\\w'\\-]+ legs round at ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) slips on a thin layer of fluid\\, [\\w'\\-]+ feet flying out from under [\\w'\\-]+\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Water thunders down upon ([\\w'\\-]+)\\, driving [\\w'\\-]+ relentlessly to [\\w'\\-]+ knees\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^The [\\w'\\-]+ leg of ([\\w'\\-]+) buckles under the impact\\, and [\\w'\\-]+ goes sprawling\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": " ^[\\w'\\-]+ lunges downward, slamming theedge of .* into the shins of ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Sweeping out with a blade hand\\, [\\w'\\-]+ strikes at the back of ([\\w'\\-]+)\\'s knee\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^As your blow cuts deeply into the leg of ([\\w'\\-]+)\\, you drive savagely forward\\, taking [\\w'\\-]+ clean off [\\w'\\-]+ feet\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You strike a savage blow with your quarterstaff at (\\w+)\\'s damaged leg\\, bringing \\w+ crashing to the ground\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^(\\w+) is flung violently from \\w+ feet\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) has already fallen to the ground\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You deftly hook .* behind ([\\w'\\-]+)'s foot and send [\\w'\\-]+ tumbling off (.*) before driving the point of the weapon into [\\w'\\-]+ (right leg|left leg).$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^(\\w+) is swept off \\w+ feet by the blast\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^A mighty, bestial roarfrom \\w+ leaves (\\w+) looking dazed\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Expert Diagnose True",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Casting a discerning eye over ([\\w'\\-]+), you determine that \\w+ shows the symptoms of ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Expert Diagnose False",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Casting a discerning eye over ([\\w'\\-]+), you can see no symptoms of ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Dustbomb",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^You lob a dust bomb at the ground and watch it explode.",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Nausea",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) doubles over\\, vomiting violently\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Confusion",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) looks about bemusedly\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Slickness",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "yes",
+              "multilineDelta": "1",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "The protective coating covering the skin of",
+                            "type": "startOfLine"
+                     },
+                     {
+                            "pattern": "^The protective coating covering the skin of ([\\w'\\-]+) sloughs off\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Rolling Getup",
+              "isActive": "no",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) rolls smoothly back to [\\w'\\-]+ feet\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Diagnosing Off Balance",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "You can not do that again so soon.",
+                            "type": "exactMatch"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Diagnosing On Balance",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "You may check someone for afflictions once again.",
+                            "type": "exactMatch"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Invalid Aff",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "That is not a valid affliction to check for.",
+                            "type": "exactMatch"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Mickey",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) pops a mickey into \\w+ mouth\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Paranoia",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "The raven dives at ",
+                            "type": "startOfLine"
+                     },
+                     {
+                            "pattern": "^The raven dives at ([\\w'\\-]+) and pulls up short\\, making \\w+ uneasy\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Deafness",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "yes",
+              "multilineDelta": "1",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "A brief look of concentration crosses the face of",
+                            "type": "startOfLine"
+                     },
+                     {
+                            "pattern": "A brief look of concentration crosses the face of ([\\w'\\-]+)",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Snake Bite",
+              "isActive": "no",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^An .* sinks its fangs into the neck of ([\\w'\\-]+)\\, injecting a potent dose of toxin\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^A .* sinks its fangs into the neck of ([\\w'\\-]+)\\, injecting a potent dose of toxin\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Masochism",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) drives a clenched fist into [\\w'\\-]+ gut\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) uses [\\w'\\-]+ right foot to stomp on [\\w'\\-]+ left as hard as possible\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) smiles as [\\w'\\-]+ rams [\\w'\\-]+ fist into [\\w'\\-]+ jaw\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^With the heel of [\\w'\\-]+ palm\\, ([\\w'\\-]+) smacks [\\w'\\-]+ upside the head\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) uses [\\w'\\-]+ [\\w'\\-]+ foot to stomp on [\\w'\\-]+ [\\w'\\-]+ as hard as possible\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Infestation",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "yes",
+              "multilineDelta": "1",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "You sense through your malignant connection to your infestation that ",
+                            "type": "startOfLine"
+                     },
+                     {
+                            "pattern": "^You sense through your malignant connection to your infestation that ([\\w'\\-]+) has been cursed with ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Attended",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^[\\w'\\-]+ glows with an emerald hue and snaps [\\w'\\-]+ fingers at ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Claustrophobia",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) begins to pant in terror\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Agoraphobia",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) is gripped with fear\\, staring out with terrified eyes\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Dementia",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) stares about [\\w'\\-]+ frenziedly\\, wild\\-eyed\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "TimeLoop",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "yes",
+              "multilineDelta": "1",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "Grey fog begins to rise from the suddenly panicked-looking",
+                            "type": "startOfLine"
+                     },
+                     {
+                            "pattern": "^Grey fog begins to rise from the suddenly panicked\\-looking ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Parried Venom Decline",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) parries the attack with a deft manoeuvre.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Bcry",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) falls to [\\w'\\-]+ knees and clutches [\\w'\\-]+ ears as the shaft of sound strikes ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Nairat",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Ethereal bonds flash forth to bind ([\\w'\\-]+) as [\\w'\\-]+ gaze falls upon a nairat rune\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Epilepsy",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) begins to jerk and shake violently\\, foaming at the mouth\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Frozen Disrupt",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) shivers particularly intensely\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Hamstring Lost",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) seems able to move more freely all of a sudden\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Peace",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+)\\'s eyes are filled with compassion and peace\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Clumsiness",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) misses you with [\\w'\\-]+ dirk by a hair\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) points [\\w'\\-]+ finger at you\\, but nothing seems to happen\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^A frustrated frown crosses the face of (\\w+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Blindness",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) blinks slowly\\, and begins to tremble\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Not Asthmatic",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "You attempt to squeeze the life out of the effigy in your hands, but find the torso too tight.",
+                            "type": "exactMatch"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Agith'tai",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Your mental defences lash out against ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Paralysis",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Horror overcomes ([\\w'\\-]+)'s face as ([\\w'\\-]+) body stiffens into paralysis\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) stiffens suddenly\\, \\w+ features a masque frozen in agony\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+)'s body stiffens rapidly with paralysis\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^The body of ([\\w'\\-]+) locks in paralysis as [\\w'\\-]+ directs a short burst of arcane power in [\\w'\\-]+ direction\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Lunging to the side\\, [\\w'\\-]+ brings [\\w'\\-]+ shield around to smash into the spine of ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^[\\w'\\-]+ recites an epic tale of the heroism of Nicator to ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Horror overcomes the face of ([\\w'\\-]+) as [\\w'\\-]+ body locks in paralysis\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+)\\'s limbs suddenly lock up\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Psion Epseth",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^[\\w'\\-]+ ducks low\\, \\w+ blade slicing into the ([\\w'\\-]+) ([\\w'\\-]+) of ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Not Crushed Throat",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^(\\w+) is not sufficiently incapacitated for you to dispatch \\w+\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Hypersomnia",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^(\\w+) suddenly appears tired all of a sudden\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Camus Bite",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^You sink your fangs into \\w+\\, injecting just the proper amount of camus\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Relapsed",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) screams out in agony\\, struck by the effects of a vicious venom\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Scytherus Bite Prompt",
+              "isActive": "no",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "",
+                            "type": "prompt"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Beez",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "yes",
+              "multilineDelta": "1",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "The angry swarm of bees descends upon ",
+                            "type": "startOfLine"
+                     },
+                     {
+                            "pattern": "^The bees sting (\\w+) into paralysis\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Artificing",
+              "isActive": "yes",
+              "isFolder": "yes",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": null,
+              "script": ""
+       },
+       {
+              "name": "Air Elemental",
+              "isActive": "yes",
+              "isFolder": "yes",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": null,
+              "script": ""
+       },
+       {
+              "name": "Sentinel Pets",
+              "isActive": "yes",
+              "isFolder": "yes",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": null,
+              "script": ""
+       }
+]

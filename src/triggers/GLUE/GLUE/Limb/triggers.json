@@ -1,0 +1,46 @@
+[
+       {
+              "name": "Dealt Damage",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^As your blow lands with a crunch, you perceive that you have dealt (?\u003camount\u003e.+)% damage to (?\u003cname\u003e\\w+)'s (?\u003climb\u003e.+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^As you carve into (?\u003cname\u003e\\w+), you perceive that you have dealt (?\u003camount\u003e.+)% damage to (?:his|her|faes|your) (?\u003climb\u003e.+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Study Limb",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^You carefully study the (?<limb>.+) of (?<name>[\\w'\\-]+), noting that it appears to be (?<pct>\\d+\\.?\\d*)% of the way to breaking\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       }
+]

@@ -1,0 +1,14 @@
+[
+       {
+              "name": "Chase",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Chase_ClassActions",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       }
+]

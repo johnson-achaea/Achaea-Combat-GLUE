@@ -1,0 +1,20 @@
+[
+       {
+              "name": "Shikudo",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "yes"
+       },
+       {
+              "name": "Psion",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "yes"
+       },
+       {
+              "name": "Dragon",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "yes"
+       }
+]

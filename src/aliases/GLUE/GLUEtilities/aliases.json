@@ -1,0 +1,16 @@
+[
+       {
+              "name": "Exploration",
+              "isActive": "yes",
+              "regex": "",
+              "script": "",
+              "isFolder": "yes"
+       },
+       {
+              "name": "ItemDB",
+              "isActive": "yes",
+              "regex": "",
+              "script": "",
+              "isFolder": "yes"
+       }
+]

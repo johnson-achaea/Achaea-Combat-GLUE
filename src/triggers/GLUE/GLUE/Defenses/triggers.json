@@ -1,0 +1,242 @@
+[
+       {
+              "name": "Shield Up",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) raises [\\w']+ hands and a shimmering shield appears before (?:him|her|them)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^A nearly invisible magical shield forms around ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^.+ as your attack rebounds off of ([\\w'\\-]+)'s shield\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Shield Down",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+)'s shimmering shield flickers and fades\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) lowers [\\w']+ hands\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You raze ([\\w'\\-]+)'s magical shield with",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You drive a spike of psychic force straight through the shield surrounding ([\\w'\\-]+), causing it to explode into translucent shards\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Shield Down 3P",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) razes ([\\w'\\-]+)'s magical shield with .*\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) whips .* through the air in front of ([\\w'\\-]+), to no effect\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) raises Gattan'lier's hunger and points it at ([\\w'\\-]+) with a sinister smile\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Rebounding Up",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) takes a long drag off [\\w']+ pipe\\, exhaling a thick\\, white haze\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Rebounding Down",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+)'s rebounding aura is stripped\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+)'s aura of weapons rebounding disappears\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "CurseWard Up",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^A shimmering curseward appears around ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You try to curse ([\\w'\\-]+)\\, but [\\w'\\-]+ is warded\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You stare at ([\\w'\\-]+)\\, giving [\\w'\\-]+ the evil eye\\, but [\\w'\\-]+ is warded\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "CurseWard Down",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+)'s curseward shatters!$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Prismatic Up",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) spreads [\\w']+ arms wide\\, and the air between [\\w']+ hands begins to warp and twist\\, dancing with brilliant multicoloured light as [\\w'\\-]+ crafts the prismatic barrier\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Prismatic Down",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+)'s prismatic barrier dissolves into nothing\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Speed Down",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^A dark\\, swirling vortex opens up to the [\\w'\\-]+ of ([\\w'\\-]+)\\, spewing out a horde of bats\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       }
+]

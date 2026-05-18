@@ -1,0 +1,21 @@
+{
+    "diagnostics": {
+        "globals": [
+            "matches",
+            "multimatches",
+            "cecho",
+            "echo",
+            "decho",
+            "cechoLink",
+            "tempTimer",
+            "killTimer",
+            "registerNamedEventHandler",
+            "raiseEvent",
+            "ra",
+            "Legacy",
+            "target",
+            "enClass",
+            "GLUE"
+        ]
+    }
+}

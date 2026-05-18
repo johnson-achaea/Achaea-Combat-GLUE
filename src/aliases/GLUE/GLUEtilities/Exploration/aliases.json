@@ -1,0 +1,44 @@
+[
+       {
+              "name": "Exploration Toggle",
+              "isActive": "yes",
+              "regex": "^et toggle$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Exploration Go Next",
+              "isActive": "yes",
+              "regex": "^et gonext$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Exploration Unexplored",
+              "isActive": "yes",
+              "regex": "^et unexplored$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Exploration Explored",
+              "isActive": "yes",
+              "regex": "^et explored$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Exploration Complete",
+              "isActive": "yes",
+              "regex": "^et complete (.+)$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Exploration Auto",
+              "isActive": "yes",
+              "regex": "^et auto$",
+              "script": "",
+              "isFolder": "no"
+       }
+]

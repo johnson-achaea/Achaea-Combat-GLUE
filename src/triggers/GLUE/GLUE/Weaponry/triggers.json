@@ -1,0 +1,234 @@
+[
+       {
+              "name": "GLUE Envenomed",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^You rub some ([\\w'\\-]+) on (.*)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You secrete ([\\w'\\-]+) and deftly bring (.*) to your mouth, letting the venom drip upon it\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "GLUE Wiped",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Being careful not to poison yourself, you wipe off all the venoms from (.+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "You carefully wipe the venoms from your claws.",
+                            "type": "exactMatch"
+                     },
+                     {
+                            "pattern": "There are no venoms on that item at present.",
+                            "type": "exactMatch"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "GLUE Attack",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^You viciously jab (.*) into .*",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You viciously stab (.*) into .*",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You slice into the [\\w'\\-]+ [\\w'\\-]+ of [\\w'\\-]+ with (.*)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Lightning-quick, you jab .* with (.*)\\.",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Lightning-quick, you stab .* with (.*)\\.",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Lunging forward with long, flashing ([\\w'\\-]+) extended, you tear into the flesh of .*",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You slice into the [\\w'\\-]+ of [\\w'\\-]+ with (.*)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You flash (.*) in front of the eyes of ([\\w'\\-]+)",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You cock back your arm and throw (.*) at ([\\w'\\-]+)",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You slice into [\\w'\\-]+ with (.+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Lunging forward with long, flashing ([\\w'\\-]+) extended, you tear into",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You swing (.*) at [\\w'\\-]+ with all your might\\.",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You slash into [\\w'\\-]+ with (.*)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You whip (.+) in a controlled arc at [\\w'\\-]+\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^With your victim exposed\\, you crack (.*) back for a second assault\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You slash into [\\w'\\-]+\\'s .* with (.*)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You swing (.*) at [\\w'\\-]+\\'s .* with all your might\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Taking hold of (.+) with a firm two-handed grip\\, you hew savagely at [\\w'\\-]+\\'s .+\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Raising (.+) above your head\\, you bring it down upon [\\w'\\-]+\\'s head with terrible force\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Bracing your feet\\, you lunge upward at [\\w'\\-]+ with (.+)\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You viciously lacerate ([\\w'\\-]+) with .+\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^You viciously lacerate the .+ of ([\\w'\\-]+) with .+\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "GLUE Confirmed Hit",
+              "isActive": "no",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "",
+                            "type": "prompt"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "GLUE Attack Missed",
+              "isActive": "no",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) dodges nimbly out of the way\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) quickly jumps back, avoiding the attack\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) twists \\w+ body out of harm's way\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^A reflection of ([\\w'\\-]+) blinks out of existence\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) parries the attack with a deft manoeuvre\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) steps into the attack, grabs your arm, and throw",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^A chaos orb intercepts the attack against .+ and renders it harmless\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^([\\w'\\-]+) moves into your attack, knocking your blow aside before viciously countering with a strike to your head\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Cracks spider across the surface of the crimson shield surrounding ([\\w'\\-]+)\\, before it abruptly winks out of existence\\.$",
+                            "type": "regex"
+                     },
+                     {
+                            "pattern": "^Grey fog begins to rise from the suddenly panicked\\-looking ([\\w'\\-]+)\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       }
+]

@@ -1,0 +1,80 @@
+[
+       {
+              "name": "Reset Limb",
+              "isActive": "yes",
+              "regex": "^r (ll|rl|la|ra|h|t|all)$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Limb Prompt",
+              "isActive": "yes",
+              "regex": "^lp$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Reset Affs",
+              "isActive": "yes",
+              "regex": "^gr$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Toggle Debug",
+              "isActive": "yes",
+              "regex": "^gdebug$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Toggle Echos",
+              "isActive": "yes",
+              "regex": "^gechos$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Toggle Chase",
+              "isActive": "yes",
+              "regex": "^gchase$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Toggle Aff Calling",
+              "isActive": "yes",
+              "regex": "^ca$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Sim Add Aff",
+              "isActive": "yes",
+              "regex": "^gadd (.+)$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "Sim Cure",
+              "isActive": "yes",
+              "regex": "^gcure (.+)$",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "States Summary",
+              "isActive": "yes",
+              "regex": "^gstates$",
+              "script": "",
+              "isFolder": "no"
+       },
+
+       {
+              "name": "GLUEtilities",
+              "isActive": "yes",
+              "regex": "",
+              "script": "",
+              "isFolder": "yes"
+       }
+]

@@ -1,0 +1,1 @@
+disableTrigger("CTF Flag Line")

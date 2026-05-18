@@ -1,0 +1,1 @@
+GLUE.util.exploration.nextRoom()

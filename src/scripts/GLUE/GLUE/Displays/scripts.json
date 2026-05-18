@@ -1,0 +1,14 @@
+[
+       {
+              "name": "GLUE Prompt Colour",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "GLUE Prompt Limbs",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       }
+]
