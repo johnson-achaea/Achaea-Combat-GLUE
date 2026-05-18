@@ -18,5 +18,8 @@ local targetName = multimatches[1][2]
 if not GLUE.IsTarget(targetName) then return end
 
 GLUE.util.PruneWith("paralysis")
--- Process tree tattoo cure
+
+local nextLine = multimatches[3][1] or ""
+if GLUE.CheckSpecialCure(nextLine) then return end
+
 GLUE.cure.Tree()

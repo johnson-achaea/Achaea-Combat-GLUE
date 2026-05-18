@@ -2,4 +2,4 @@ if not GLUE or not GLUE.IsTarget then return end
 if GLUE.illusionCheck() then return end
 if not GLUE.IsTarget(matches[2]) then return end
 
-GLUE.state.AddSmartAffliction({ "madness", "vertigo", "hallucinations" })
+GLUE.state.AddSmartAffliction({ "shadowmadness", "vertigo", "hallucinations" })

@@ -180,8 +180,8 @@ GLUE.affs.herbs = {
     ["cuprum flake"] = {"timeloop", "generosity", "pacifism", "justice", "lovers"},
 
     -- Goldenseal cures
-    ["goldenseal root"] = {"fulminated", "sandfever", "dizziness", "epilepsy", "impatience", "shyness", "stupidity", "depression"},
-    ["plumbum flake"] = {"fulminated", "sandfever", "dizziness", "epilepsy", "impatience", "shyness", "stupidity", "depression"},
+    ["goldenseal root"] = {"fulminated", "sandfever", "dizziness", "epilepsy", "impatience", "shyness", "stupidity", "depression", "shadowmadness"},
+    ["plumbum flake"] = {"fulminated", "sandfever", "dizziness", "epilepsy", "impatience", "shyness", "stupidity", "depression", "shadowmadness"},
 
     -- Bloodroot cures
     ["bloodroot leaf"] = {"pyramides", "paralysis", "slickness"},
@@ -379,7 +379,6 @@ GLUE.affs.passive_curable = {
     "timeloop",
     "parasite",
     "retribution",
-    "shadowmadness",
     "depression",
     "pyramides",
     "itching",
@@ -442,16 +441,7 @@ GLUE.affs.passive_curable = {
 GLUE.affs.colorMap = GLUE.affs.colorMap or {}
 
 function GLUE.affs.buildColorMap()
-    if not (Legacy and Legacy.Curing and Legacy.Curing.cures) then return end
-    GLUE.affs.colorMap = {}
-    for c, t in pairs(Legacy.Curing.cures) do
-        local col = Legacy.Settings.Curing.colors[c]
-                    or Legacy.Settings.Curing.colors[c:lower()]
-                    or "cyan"
-        for _, a in pairs(t) do
-            GLUE.affs.colorMap[a:lower()] = col
-        end
-    end
+    GLUE.affs.colorMap = GLUE.integration.BuildColorMap()
 end
 
 GLUE.affs.buildColorMap()
