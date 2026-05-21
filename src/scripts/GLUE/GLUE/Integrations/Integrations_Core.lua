@@ -69,6 +69,24 @@ function GLUE.integration.GetAfflictionAbbrev(aff)
     return aff
 end
 
+-- Returns the number of afflictions currently tracked on the player.
+-- Override to integrate with your own curing system.
+function GLUE.integration.GetMyAfflictionCount()
+    if not (Legacy and Legacy.Curing and Legacy.Curing.Affs) then return 0 end
+    local n = 0
+    for _ in pairs(Legacy.Curing.Affs) do n = n + 1 end
+    return n
+end
+
+-- Returns true if the player currently has the named defense up.
+-- Override to integrate with your own defense tracking system.
+function GLUE.integration.IHaveDefense(name)
+    if Legacy and Legacy.Curing.Defs.current[name] then
+        return true
+    end
+    return false
+end
+
 -- Builds and returns a table of { [affliction] = color_string } for the prompt display.
 -- Override to supply your own color map.
 function GLUE.integration.BuildColorMap()
