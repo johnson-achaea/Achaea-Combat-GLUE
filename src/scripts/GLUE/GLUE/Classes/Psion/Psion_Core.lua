@@ -13,8 +13,6 @@ GLUE.psion.lightbinds = GLUE.psion.lightbinds or {}
 -- Active secondary tick timers per unweaving type (all three tick at 4s intervals)
 GLUE.psion.unweaveTick = GLUE.psion.unweaveTick or {}
 
-local UNWEAVE_MAX_STACKS = 6
-
 -- Start the repeating 4-second secondary tick for an unweaving type.
 -- Rate-limited: if a timer is already running for this type, do nothing.
 -- Increments the affliction stack each tick up to UNWEAVE_MAX_STACKS.
@@ -33,7 +31,7 @@ function GLUE.psion.StartUnweaveTick(uwtype)
             return
         end
         for _, state in ipairs(GLUE.state.states) do
-            if state.affs[affName] and state.affs[affName] < UNWEAVE_MAX_STACKS then
+            if state.affs[affName] and state.affs[affName] < 2 then
                 state.affs[affName] = state.affs[affName] + 1
             end
         end
