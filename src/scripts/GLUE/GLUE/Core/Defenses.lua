@@ -22,9 +22,9 @@ GLUE.defenses.current = {
     hands = false,
     healing = false,
     breathing = false,
-    speed = false,
-    blind = false,
-    deaf = false,
+    speed = true,
+    blind = true,
+    deaf = true,
 }
 
 --[[
@@ -73,6 +73,9 @@ function GLUE.defenses.Reset()
     for defense, _ in pairs(GLUE.defenses.current) do
         GLUE.defenses.current[defense] = false
     end
+    GLUE.defenses.current.speed = true
+    GLUE.defenses.current.blind = true
+    GLUE.defenses.current.deaf  = true
 
     if GLUE.config.debug then
         cecho("\n<green>[GLUE]<reset> All defenses cleared")
