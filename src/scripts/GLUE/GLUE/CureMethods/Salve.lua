@@ -57,9 +57,9 @@ function GLUE.cure.Salve(location)
             if damage > 100 then
                 -- Restoration (damaged/mangled): RestorationComplete handles after 4s
                 break
-            elseif damage > 0 or GLUE.state.HasAffliction("broken" .. suffix) then
-                -- Mending: broken limb (either flat table or aff state — restoration
-                -- downgrades to broken while resetting flat damage to 0)
+            elseif GLUE.state.HasAffliction("broken" .. suffix) then
+                -- Mending: broken limb. Flat damage is always 0 at this stage
+                -- (it is reset when damaged/mangled is cured, not when broken is).
                 GLUE.state.RemoveAffliction("broken" .. suffix)
                 if GLUE.config.debug then
                     cecho(string.format("\n<green>[GLUE Salve]<reset> Mend: %s cured", limb))
@@ -124,35 +124,38 @@ end
     mangled → damaged, damaged → broken, serioustrauma → mildtrauma → cured
     Also updates flat limb damage tracking via GLUE.limbs.HandleRestorationCure
 ]]--
-function GLUE.cure.RestorationComplete(location)
+function GLUE.cure.RestorationComplete(location, apply_id)
     if GLUE.config.debug then
         cecho(string.format("\n<green>[GLUE RestorationComplete]<reset> %s (%d states)", location, #GLUE.state.states))
     end
 
-    -- Downgrade restoration afflictions in all states
+    -- Only resolve states carrying this specific apply_id.
+    -- Iterate the ordered salve list so left-side limbs are always picked first.
+    local anyResolved = false
     for _, state in ipairs(GLUE.state.states) do
-        local toDowngrade = {}
-        local affsList = GLUE.affs.salve[location]
-
-        for currentAff, _ in pairs(state.affs) do
-            if GLUE.affs.restore_downgrade[currentAff] then
-                if affsList and table.contains(affsList, currentAff) then
-                    local newAff = GLUE.affs.restore_downgrade[currentAff]
-                    table.insert(toDowngrade, {old = currentAff, new = newAff})
+        if state.pending_restore
+            and state.pending_restore.location == location
+            and state.pending_restore.apply_id == apply_id
+        then
+            anyResolved = true
+            state.pending_restore = nil
+            local affsList = GLUE.affs.salve[location]
+            for _, aff in ipairs(affsList or {}) do
+                if state.affs[aff] and GLUE.affs.restore_downgrade[aff] ~= nil then
+                    local newAff = GLUE.affs.restore_downgrade[aff]
+                    state.affs[aff] = nil
+                    if newAff ~= "" then
+                        state.affs[newAff] = 1
+                    end
+                    break
                 end
-            end
-        end
-
-        for _, change in ipairs(toDowngrade) do
-            state.affs[change.old] = nil
-            if change.new and change.new ~= "" then
-                state.affs[change.new] = 1
             end
         end
     end
 
-    -- Update flat limb damage tracking
-    if GLUE.limbs and GLUE.limbs.HandleRestorationCure and GLUE.target.name ~= "" then
+    -- Only update flat limb damage if at least one restoration branch was actually resolved.
+    -- If all surviving states were mend branches (no pending_restore), flat damage stays put.
+    if anyResolved and GLUE.limbs and GLUE.limbs.HandleRestorationCure and GLUE.target.name ~= "" then
         GLUE.limbs.HandleRestorationCure(GLUE.target.name, location)
     end
 

@@ -2,40 +2,23 @@
     GLUE Trigger: Opponent Applied Salve
     Pattern: ^([\w'\-]+) takes some (?:balm|salve) from a vial and rubs it on \w+ ([\w'\-]+)\.$
 
-    Captures when target applies a salve to a body location
+    Forks each state into mending and/or restoration branches based on which
+    balances are available in that state's history. One timer per apply resolves
+    restoration branches keyed by apply_id.
+
+    Balance constants (seconds):
+        Mending     — salve   balance: 0.8s
+        Restoration — restore balance: 3.8s
 ]]--
 
 if not GLUE or not GLUE.IsTarget then return end
 if GLUE.illusionCheck() then return end
 
--- Extract the name and location from matches
 local targetName = matches[2]
-local location = matches[3]
+local location   = matches[3]
 
--- Only process if this is our target
 if not GLUE.IsTarget(targetName) then return end
 
--- if they applied within the last second, ignore this one.
-if not GLUE.balance.IsAvailable("salve") then
-    if GLUE.config.debug then
-        cecho("\n<red>[GLUE]<reset> Ignoring salve apply: " .. location)
-    end
-    return
-end
-
--- Important: "applied salve" message is the same for both mending and restoration
--- We can't tell which it is, so we're going to make a naive assumption.
--- if a restoration aff is present for the limb, assume they are applying to it.
-
--- Don't process if we're already waiting on a restoration timer for this location
--- if GLUE.pending_restoration then
---     if GLUE.config.debug then
---         cecho(string.format("\n<yellow>[GLUE]<reset> Ignoring salve to %s (restoration timer active)", location))
---     end
---     return
--- end
-
--- Get the list of afflictions this location can cure
 local affsList = GLUE.affs.salve[location]
 if not affsList then
     if GLUE.config.debug then
@@ -44,39 +27,109 @@ if not affsList then
     return
 end
 
--- Check what types of afflictions they could be curing
-local has_mending = false
-local has_restoration = false
+-- Seeing a salve apply proves slickness/bloodfire are absent.
+GLUE.state.PruneStatesWithAffliction("bloodfire")
+GLUE.state.PruneStatesWithAffliction("slickness")
 
-for _, state in ipairs(GLUE.state.states) do
-    for _, aff in ipairs(affsList) do
-        if state.affs[aff] then
-            if GLUE.affs.restore_downgrade[aff] then
-                has_restoration = true
-            else
-                has_mending = true
-            end
+local MEND_BAL         = 0.8
+local RESTORE_BAL      = 3.8
+local now              = os.clock()
+local apply_id         = now
+-- Known fake appliers are expected to mend with nothing — don't penalise empty mend branches.
+local isFaker          = GLUE.isFakeApplier and GLUE.isFakeApplier(targetName)
+local emptyMendPenalty = isFaker and 1.0 or GLUE.config.wastePenalty
+
+-- Cure the first mending aff for this location within a single state.
+-- Returns true if something was cured.
+local function applyMending(state, loc)
+    local limbPairs = loc == "arms" and {"left arm", "right arm"}
+                   or loc == "legs" and {"left leg", "right leg"}
+                   or {}
+    for _, limb in ipairs(limbPairs) do
+        local suffix = limb:gsub(" ", "")
+        if state.affs["broken" .. suffix] then
+            state.affs["broken" .. suffix] = nil
+            return true
         end
     end
-    if has_mending and has_restoration then break end
-end
-
--- If they're on salve bal with a resto aff, assume this is a resto apply. It is not perfect.
--- later on in this project, this is a serious area for improvement. We can fork on the assumption of resto/mending
-if has_restoration or (not has_mending) then
-    GLUE.pending_restoration = true
-
-    if GLUE.config.debug then
-        cecho(string.format("\n<cyan>[GLUE]<reset> Restoration timer started for %s", location))
+    -- Non-limb: first mending aff in salve list
+    for _, aff in ipairs(GLUE.affs.salve[loc] or {}) do
+        if not GLUE.affs.restore_downgrade[aff] and state.affs[aff] then
+            state.affs[aff] = nil
+            return true
+        end
     end
-
-    if GLUE.pending_restoration_timer and remainingTime(GLUE.pending_restoration_timer) then killTimer(GLUE.pending_restoration_timer) end
-
-    GLUE.pending_restoration_timer = tempTimer(3.8, function()
-        GLUE.cure.RestorationComplete(location)
-        GLUE.pending_restoration = false
-    end)
-else
-    -- handles mending affs
-    GLUE.cure.Salve(location)
+    return false
 end
+
+local newStates = {}
+
+for _, state in ipairs(GLUE.state.states) do
+    local salveElapsed   = now - (state.salve_time   or 0)
+    local restoreElapsed = now - (state.restore_time  or 0)
+
+    local canMend    = salveElapsed   >= MEND_BAL
+    local canRestore = restoreElapsed >= RESTORE_BAL and not state.pending_restore
+
+    if not canMend and not canRestore then
+        -- Apply is impossible given this state's balance history — waste penalty.
+        local s   = GLUE.state.CopyState(state)
+        s.prob    = (state.prob or 1) * GLUE.config.wastePenalty
+        table.insert(newStates, s)
+
+    elseif canMend and canRestore then
+        -- Ambiguous: fork into mending branch and restoration branch.
+        local halfProb = (state.prob or 1) * 0.5
+
+        local mBranch       = GLUE.state.CopyState(state)
+        mBranch.salve_time  = now
+        local mended        = applyMending(mBranch, location)
+        if not mended then mBranch.has_fake_apply = true end
+        mBranch.prob        = mended and halfProb or (halfProb * emptyMendPenalty)
+
+        local rBranch                  = GLUE.state.CopyState(state)
+        rBranch.restore_time           = now
+        rBranch.pending_restore        = { location = location, apply_id = apply_id }
+        rBranch.prob                   = halfProb
+
+        table.insert(newStates, mBranch)
+        table.insert(newStates, rBranch)
+
+    elseif canMend then
+        local s          = GLUE.state.CopyState(state)
+        s.salve_time     = now
+        local mended     = applyMending(s, location)
+        if not mended then s.has_fake_apply = true end
+        s.prob           = mended and (state.prob or 1) or ((state.prob or 1) * emptyMendPenalty)
+        table.insert(newStates, s)
+
+    else
+        -- Only restoration is possible.
+        local s                  = GLUE.state.CopyState(state)
+        s.restore_time           = now
+        s.pending_restore        = { location = location, apply_id = apply_id }
+        table.insert(newStates, s)
+    end
+end
+
+GLUE.state.states = newStates
+GLUE.state.Normalize()
+GLUE.state.Optimize()
+
+if GLUE.OnStateUpdate  then GLUE.OnStateUpdate()  end
+if GLUE.UpdateDisplay  then GLUE.UpdateDisplay()   end
+
+-- One timer per apply: resolves all restoration branches carrying this apply_id.
+local timerId
+timerId = tempTimer(RESTORE_BAL, function()
+    GLUE.cure.RestorationComplete(location, apply_id)
+    -- Remove from tracking table
+    if GLUE.restore_timers then
+        for i, id in ipairs(GLUE.restore_timers) do
+            if id == timerId then table.remove(GLUE.restore_timers, i) break end
+        end
+    end
+end)
+
+GLUE.restore_timers = GLUE.restore_timers or {}
+table.insert(GLUE.restore_timers, timerId)
