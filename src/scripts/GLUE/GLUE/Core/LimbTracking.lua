@@ -157,6 +157,9 @@ end
 function GLUE.limbs.ResetAll(name)
     name = name:lower():title()
 
+    -- Kill all in-flight restoration timers — limb damage is being fully cleared.
+    if GLUE.killRestoreTimers then GLUE.killRestoreTimers() end
+
     GLUE.limbs.damage[name] = {}
 
     -- Clear all limb afflictions for this target from all states

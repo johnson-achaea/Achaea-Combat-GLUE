@@ -30,8 +30,15 @@ function GLUE.target.SetTarget(name)
 
     GLUE.target.name = name
 
+    if GLUE.killRestoreTimers then GLUE.killRestoreTimers() end
     GLUE.state.ResetTimedAfflictions()
-    GLUE.state.states = {{affs = {}, prob = 1.0}}
+    GLUE.state.states = {{
+        affs            = {},
+        prob            = 1.0,
+        salve_time      = 0,
+        restore_time    = 0,
+        pending_restore = nil,
+    }}
 
     if GLUE.balance and GLUE.balance.ResetAll then
         GLUE.balance.ResetAll()

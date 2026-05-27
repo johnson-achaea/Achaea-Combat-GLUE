@@ -77,9 +77,16 @@ function GLUE.Reset()
 
     -- Create initial state with no afflictions
     table.insert(GLUE.state.states, {
-        affs = {},
-        prob = 1.0,
+        affs            = {},
+        prob            = 1.0,
+        salve_time      = 0,
+        restore_time    = 0,
+        pending_restore = nil,
     })
+
+    -- restore_timers are intentionally kept alive across aff state resets so that
+    -- in-flight restorations can still update the flat limb damage table.
+    -- They are killed by GLUE.killRestoreTimers() when limb damage is fully cleared.
 
     -- Assume full mana until the next observe
     GLUE.target.manaPercent = 100
@@ -87,6 +94,11 @@ function GLUE.Reset()
     -- Reset all cure balances
     if GLUE.balance and GLUE.balance.ResetAll then
         GLUE.balance.ResetAll()
+    end
+
+    -- Reset defense tracking
+    if GLUE.defenses and GLUE.defenses.Reset then
+        GLUE.defenses.Reset()
     end
 
     -- Clear venom tracking
@@ -113,6 +125,34 @@ function GLUE.SoftReset()
         GLUE.psion.StopUnweaveTick()
     end
     GLUE.Reset()
+end
+
+-- Kill all in-flight restoration timers. Called when limb damage is fully cleared
+-- or when switching targets, NOT on plain aff-state resets.
+function GLUE.killRestoreTimers()
+    if GLUE.restore_timers then
+        for _, id in ipairs(GLUE.restore_timers) do killTimer(id) end
+    end
+    GLUE.restore_timers = {}
+end
+
+-- Fake applier tracking (in-memory only) ------------------------------------
+
+GLUE.fakeAppliers = GLUE.fakeAppliers or {}
+
+function GLUE.recordFakeApplier(name)
+    if not name or name == "" then return end
+    local key = name:lower()
+    if GLUE.fakeAppliers[key] then return end
+    GLUE.fakeAppliers[key] = true
+    if GLUE.config.echos or GLUE.config.debug then
+        cecho(string.format("\n<yellow>[GLUE]<reset> Recorded fake applier: %s", name))
+    end
+end
+
+function GLUE.isFakeApplier(name)
+    if not name then return false end
+    return GLUE.fakeAppliers[name:lower()] == true
 end
 
 -- Defer colorMap build so Legacy is guaranteed to be loaded first

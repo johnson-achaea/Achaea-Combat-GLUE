@@ -28,6 +28,7 @@ function GLUE.SetTarget(name)
 
     -- If switching targets, reset tracking
     if GLUE.target.name and GLUE.target.name ~= "" and GLUE.target.name:lower() ~= name:lower() then
+        if GLUE.killRestoreTimers then GLUE.killRestoreTimers() end
         GLUE.Reset()
     end
 
@@ -42,14 +43,10 @@ end
     Clear the current target
 ]]--
 function GLUE.ClearTarget()
+    if GLUE.killRestoreTimers then GLUE.killRestoreTimers() end
     GLUE.target.name = ""
     GLUE.target.class = ""
     GLUE.Reset()
-
-    -- Also clear defenses
-    if GLUE.defenses and GLUE.defenses.Reset then
-        GLUE.defenses.Reset()
-    end
 
     if GLUE.config.debug then
         cecho("\n<green>[GLUE]<reset> Target cleared")

@@ -26,6 +26,12 @@ function GLUE.state.CopyState(state)
             for limb, damage in pairs(limbData) do copy.limbs[name][limb] = damage end
         end
     end
+    copy.salve_time      = state.salve_time      or 0
+    copy.restore_time    = state.restore_time    or 0
+    copy.has_fake_apply  = state.has_fake_apply  or false
+    if state.pending_restore then
+        copy.pending_restore = { location = state.pending_restore.location, apply_id = state.pending_restore.apply_id }
+    end
     return copy
 end
 
@@ -368,7 +374,14 @@ local function generateStateHash(state)
         table.insert(affList, aff .. "=" .. count)
     end
     table.sort(affList)
-    return table.concat(affList, "|") .. ":bleed=" .. tostring(state.bleed or 0)
+    local pr = state.pending_restore
+        and (state.pending_restore.location .. "@" .. tostring(state.pending_restore.apply_id))
+        or "nil"
+    return table.concat(affList, "|")
+        .. ":bleed=" .. tostring(state.bleed or 0)
+        .. ":st="    .. tostring(state.salve_time   or 0)
+        .. ":rt="    .. tostring(state.restore_time  or 0)
+        .. ":pr="    .. pr
 end
 
 -- Branches each state: states with the aff get weight probability, states without get (1-weight).
@@ -445,8 +458,13 @@ function GLUE.state.RemoveDuplicates()
 end
 
 function GLUE.state.Optimize()
-    if #GLUE.state.states <= 1 then return end
-    return GLUE.state.RemoveDuplicates()
+    if #GLUE.state.states > 1 then
+        GLUE.state.RemoveDuplicates()
+    end
+    -- When fully resolved to one state, check for fake-apply history.
+    if #GLUE.state.states == 1 and GLUE.state.states[1].has_fake_apply and GLUE.target.name then
+        GLUE.recordFakeApplier(GLUE.target.name)
+    end
 end
 
 function GLUE.state.GetProbability(affliction)
