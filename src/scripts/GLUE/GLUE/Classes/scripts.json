@@ -16,5 +16,11 @@
               "isActive": "yes",
               "script": "",
               "isFolder": "yes"
+       },
+       {
+              "name": "Bard",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "yes"
        }
 ]
