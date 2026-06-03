@@ -1,6 +1,6 @@
 [
        {
-              "name": "Shikudo",
+              "name": "Resonances",
               "isActive": "yes",
               "isFolder": "yes",
               "multiline": "no",
@@ -15,7 +15,7 @@
               "script": ""
        },
        {
-              "name": "Psion",
+              "name": "Emanation",
               "isActive": "yes",
               "isFolder": "yes",
               "multiline": "no",
@@ -30,7 +30,7 @@
               "script": ""
        },
        {
-              "name": "Dragon",
+              "name": "Elementalism",
               "isActive": "yes",
               "isFolder": "yes",
               "multiline": "no",
@@ -45,7 +45,7 @@
               "script": ""
        },
        {
-              "name": "Depthswalker",
+              "name": "Staffcast",
               "isActive": "yes",
               "isFolder": "yes",
               "multiline": "no",
@@ -60,52 +60,7 @@
               "script": ""
        },
        {
-              "name": "Alchemist",
-              "isActive": "yes",
-              "isFolder": "yes",
-              "multiline": "no",
-              "multilineDelta": "0",
-              "matchall": "no",
-              "filter": "no",
-              "fireLength": "0",
-              "highlight": "no",
-              "highlightFG": "#ff0000",
-              "highlightBG": "#ffff00",
-              "patterns": null,
-              "script": ""
-       },
-       {
-              "name": "Bard",
-              "isActive": "yes",
-              "isFolder": "yes",
-              "multiline": "no",
-              "multilineDelta": "0",
-              "matchall": "no",
-              "filter": "no",
-              "fireLength": "0",
-              "highlight": "no",
-              "highlightFG": "#ff0000",
-              "highlightBG": "#ffff00",
-              "patterns": null,
-              "script": ""
-       },
-       {
-              "name": "Priest",
-              "isActive": "yes",
-              "isFolder": "yes",
-              "multiline": "no",
-              "multilineDelta": "0",
-              "matchall": "no",
-              "filter": "no",
-              "fireLength": "0",
-              "highlight": "no",
-              "highlightFG": "#ff0000",
-              "highlightBG": "#ffff00",
-              "patterns": null,
-              "script": ""
-       },
-       {
-              "name": "Magi",
+              "name": "Destabilise",
               "isActive": "yes",
               "isFolder": "yes",
               "multiline": "no",

@@ -1,0 +1,42 @@
+[
+       {
+              "name": "Horripilation Bond",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^Even as the wave of cold dissipates, you retain control over the fluid and send it spinning through the air to bind (\\w+) in a watery web\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Waterbond Faded",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^The tendrils of water that bound (\\w+) splash to the ground as the power sustaining them fades\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       }
+]
