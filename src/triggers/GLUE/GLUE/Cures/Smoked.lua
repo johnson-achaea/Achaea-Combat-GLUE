@@ -13,4 +13,10 @@ if string.find(nextLine, "seems suddenly unburdened, clarity reasserting itself 
     return
 end
 
+-- Earworm cured
+if string.find(nextLine, "gives a sigh of relief") then
+    GLUE.state.RemoveAffliction("earworm")
+    return
+end
+
 GLUE.cure.Smoke()

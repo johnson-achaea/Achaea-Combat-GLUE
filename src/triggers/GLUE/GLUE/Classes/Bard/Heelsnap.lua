@@ -5,8 +5,9 @@ if not GLUE or not GLUE.bard then return end
 local side = matches[2]
 local pos  = GLUE.bard.position
 
--- front position deals limb damage (not a tracked affliction)
-if pos == "side" then
+if pos == "front" then
+    GLUE.state.AddAffliction("broken" .. side .. "leg")
+elseif pos == "side" then
     if side == "left" then
         GLUE.state.AddAffliction("healthleech")
     elseif side == "right" then

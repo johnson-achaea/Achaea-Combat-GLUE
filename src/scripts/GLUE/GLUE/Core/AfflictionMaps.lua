@@ -126,6 +126,9 @@ GLUE.affs.list = {
     spiritburn = true,
     tenderskin = true,
 
+    -- Bard specific
+    earworm = true,
+
     -- Stacking afflictions (can exceed 1 stack)
     melancholic = true,
     choleric = true,
@@ -159,6 +162,7 @@ GLUE.affs.stackable = {
     crackedrib     = true,
     pressure       = true,
     crescendo      = true,
+    earworm        = true,
 }
 
 -- Herb to affliction mappings
@@ -233,6 +237,7 @@ GLUE.affs.smoke = {
     "aeon",
     "hellsight",
     "tension",
+    "earworm",
 }
 
 -- Focus cures
@@ -326,6 +331,7 @@ GLUE.affs.tree = {
     "unweavingspirit",
     "unweavingmind",
     "unweavingbody",
+    "earworm",
 }
 
 -- Salve (apply) cures - includes both mending (1s) and restoration (4s) afflictions

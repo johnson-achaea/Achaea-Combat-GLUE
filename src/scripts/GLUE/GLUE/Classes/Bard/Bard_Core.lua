@@ -7,10 +7,6 @@ GLUE.bard.position  = GLUE.bard.position  or "front"
 -- Tempo cannot be observed in third-person; defaults to "none" (most conservative counts)
 GLUE.bard.tempo     = GLUE.bard.tempo     or "none"
 
--- Grand crescendo level (0-5). 5 = finale available.
-GLUE.bard.crescendo = GLUE.bard.crescendo or 0
-GLUE.bard.canFinale = GLUE.bard.canFinale or false
-
 -- Hits required per position at each tempo (mirrors AK Bard_position_tracker)
 GLUE.bard.tempoTrack = {
     adagio   = { front = 4, side = 4, back = 3 },
@@ -35,12 +31,12 @@ function GLUE.bard.OnHit()
         GLUE.bard.position  = positionCycle[GLUE.bard.position] or "front"
         GLUE.bard.tempoHits = GLUE.bard.tempoTrack[GLUE.bard.tempo][GLUE.bard.position]
     end
-    if GLUE.bard.crescendo < 5 then
-        GLUE.bard.crescendo = GLUE.bard.crescendo + 1
-        if GLUE.bard.crescendo >= 5 then
-            GLUE.bard.canFinale = true
-        end
-    end
+
+end
+
+-- Returns true when crescendo has reached 5 stacks and finale is available.
+function GLUE.bard.CanFinale()
+    return GLUE.state.GetMaxStacks("crescendo") >= 5
 end
 
 -- Override position tracking (e.g. if position-change messages become visible)
@@ -53,8 +49,7 @@ end
 function GLUE.bard.Reset()
     GLUE.bard.position  = "front"
     GLUE.bard.tempoHits = GLUE.bard.tempoTrack[GLUE.bard.tempo]["front"]
-    GLUE.bard.crescendo = 0
-    GLUE.bard.canFinale = false
+    GLUE.state.RemoveAffliction("crescendo")
 end
 
 -- Affliction → refrain name lookup (for offense scripts)
