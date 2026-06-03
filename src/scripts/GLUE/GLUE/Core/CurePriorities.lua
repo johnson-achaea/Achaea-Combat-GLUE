@@ -16,7 +16,7 @@ GLUE.affs.cure_priority = {
         -- Tier 1: standard passive-curable affs + unweavingspirit
         timeloop        = 1, parasite       = 1, retribution    = 1, shadowmadness  = 1,
         depression      = 1, pyramides      = 1, itching        = 1, crushedthroat  = 1,
-        stuttering      = 1, addiction      = 1, aflame         = 1, agoraphobia    = 1,
+        stuttering      = 1, addiction      = 1, agoraphobia    = 1,
         anorexia        = 1, asthma         = 1, claustrophobia = 1, clumsiness     = 1,
         confusion       = 1, brokenleftarm  = 1, brokenrightarm = 1, brokenleftleg  = 1,
         brokenrightleg  = 1, darkshade      = 1, deadening      = 1, dementia       = 1,
@@ -29,17 +29,17 @@ GLUE.affs.cure_priority = {
         shyness         = 1, slickness      = 1, stupidity      = 1, weariness      = 1,
         vertigo         = 1, tension        = 1, pressure       = 1, mycalium       = 1,
         sandfever       = 1, rebbies        = 1, flushings      = 1, unweavingspirit = 1,
-        paralysis       = 1, 
+        paralysis       = 1, frozen         = 1, shivering      = 1,
         -- Tier 2: stacks (lower priority)
         torntendon      = 2, skullfracture  = 2, wristfracture  = 2, crackedrib     = 2,
         unweavingmind   = 2, unweavingbody  = 2, melancholic    = 2, choleric       = 2,
-        phlegmatic      = 2, sanguine       = 2,
+        phlegmatic      = 2, sanguine       = 2, burning        = 2,
     },
     tree = {
         blackout = 0,
         -- Tier 1: all standard tree-curable affs
         crushedthroat   = 1, stuttering     = 1, itching        = 1, aeon           = 1,
-        healthleech     = 1, haemophilia    = 1, clumsiness     = 1, aflame         = 1,
+        healthleech     = 1, haemophilia    = 1, clumsiness     = 1,
         paranoia        = 1, vertigo        = 1, agoraphobia    = 1, dizziness      = 1,
         claustrophobia  = 1, recklessness   = 1, epilepsy       = 1, addiction      = 1,
         stupidity       = 1, scytherus      = 1, slickness      = 1, generosity     = 1,
@@ -53,11 +53,11 @@ GLUE.affs.cure_priority = {
         nausea          = 1, lovers         = 1, parasite       = 1, depression     = 1,
         timeloop        = 1, manaleech      = 1, tension        = 1, tenderskin     = 1,
         spiritburn      = 1, pyramides      = 1, sandfever      = 1, fratricide     = 1,
-        unweavingspirit = 1,
+        unweavingspirit = 1, shivering      = 1,
         -- Tier 2:  stacks (lower priority)
         torntendon      = 2, skullfracture  = 2, wristfracture  = 2, crackedrib     = 2,
         unweavingmind   = 2, unweavingbody  = 2, melancholic    = 2, choleric       = 2,
-        phlegmatic      = 2, sanguine       = 2,
+        phlegmatic      = 2, sanguine       = 2, burning        = 2,
     },
     expunge = {
         impatience = 0,

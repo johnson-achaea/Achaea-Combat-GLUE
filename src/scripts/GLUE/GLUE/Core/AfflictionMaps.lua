@@ -72,7 +72,6 @@ GLUE.affs.list = {
     serioustrauma = true,
 
     -- Salve afflictions
-    aflame = true,
     calcifiedhead = true,
     calcifiedtorso = true,
     crushedthroat = true,
@@ -80,6 +79,7 @@ GLUE.affs.list = {
     frostbite = true,
     hypothermia = true,
     itching = true,
+    noinsulation = true,
     selarnia = true,
     shivering = true,
     stuttering = true,
@@ -128,6 +128,13 @@ GLUE.affs.list = {
 
     -- Bard specific
     earworm = true,
+
+    -- Magi specific
+    scalded   = true,
+    blisters  = true,
+    notemperance = true,
+    waterbonds = true,
+    deepfreeze = true,
 
     -- Stacking afflictions (can exceed 1 stack)
     melancholic = true,
@@ -275,7 +282,7 @@ GLUE.affs.tree = {
     "healthleech",
     "haemophilia",
     "clumsiness",
-    "aflame",
+    "burning",
     "paranoia",
     "vertigo",
     "agoraphobia",
@@ -310,6 +317,7 @@ GLUE.affs.tree = {
     "hypochondria",
     "selarnia",
     "frozen",
+    "shivering",
     "airdisrupt",
     "earthdisrupt",
     "firedisrupt",
@@ -336,9 +344,9 @@ GLUE.affs.tree = {
 
 -- Salve (apply) cures - includes both mending (1s) and restoration (4s) afflictions
 GLUE.affs.salve = {
-    ["body"] = {"torso", "itching", "anorexia", "frozen", "aflame", "selarnia"},
-    ["skin"] = {"frostbite", "anorexia", "frozen", "selarnia"},
-    ["torso"] = {"calcifiedtorso", "anorexia", "torso", "aflame", "hypothermia", "selarnia", "mildtrauma", "serioustrauma"},
+    ["body"] = {"torso", "itching", "anorexia", "frozen", "burning", "noinsulation", "notemperance", "selarnia"},
+    ["skin"] = {"frostbite", "anorexia", "frozen", "noinsulation", "selarnia"},
+    ["torso"] = {"calcifiedtorso", "anorexia", "torso", "burning", "hypothermia", "selarnia", "mildtrauma", "serioustrauma"},
     ["head"] = {"calcifiedhead", "stuttering", "head", "crushedthroat", "damagedhead", "mangledhead"},
     ["arms"] = {"brokenleftarm", "brokenrightarm", "damagedleftarm", "damagedrightarm", "mangledleftarm", "mangledrightarm"},
     ["legs"] = {"brokenleftleg", "brokenrightleg", "damagedleftleg", "damagedrightleg", "mangledleftleg", "mangledrightleg"},
@@ -391,7 +399,7 @@ GLUE.affs.passive_curable = {
     "crushedthroat",
     "stuttering",
     "addiction",
-    "aflame",
+    "burning",
     "agoraphobia",
     "anorexia",
     "asthma",
@@ -441,7 +449,9 @@ GLUE.affs.passive_curable = {
     "sandfever",
     "rebbies",
     "flushings",
-    "paralysis"
+    "paralysis",
+    "frozen",
+    "shivering",
 }
 
 GLUE.affs.colorMap = GLUE.affs.colorMap or {}

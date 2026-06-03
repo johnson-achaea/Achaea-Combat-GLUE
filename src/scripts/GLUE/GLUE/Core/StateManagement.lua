@@ -579,6 +579,58 @@ function GLUE.state.ForEachState(fn)
     if GLUE.OnStateUpdate then GLUE.OnStateUpdate() end
 end
 
+-- Applies one step of the freeze chain per state:
+--   noinsulation absent              → add noinsulation; if frostbite present, consume it and add shivering
+--   noinsulation present, no shiver  → add shivering
+--   shivering present                → add frozen
+function GLUE.state.ApplyFreeze()
+    local addedAffs   = {}
+    local removedAffs = {}
+
+    for _, state in ipairs(GLUE.state.states) do
+        if not state.affs.noinsulation then
+            state.affs.noinsulation = 1
+            addedAffs.noinsulation = true
+            if state.affs.frostbite then
+                state.affs.frostbite = nil
+                removedAffs.frostbite = true
+                state.affs.shivering = capStack("shivering", (state.affs.shivering or 0) + 1)
+                addedAffs.shivering = true
+            end
+        else
+            for _, aff in ipairs({"shivering", "frozen"}) do
+                if not state.affs[aff] then
+                    state.affs[aff] = capStack(aff, (state.affs[aff] or 0) + 1)
+                    addedAffs[aff] = true
+                    break
+                end
+            end
+        end
+    end
+
+    if GLUE.config.echos or GLUE.config.debug then
+        for aff in pairs(addedAffs) do
+            queueEcho("\n<green>[GLUE]<reset> +" .. affColor(aff) .. aff .. "<reset>")
+        end
+    end
+    if GLUE.config.debug then
+        for aff in pairs(removedAffs) do
+            queueEcho("\n<red>[GLUE]<reset> -" .. affColor(aff) .. aff .. "<reset>")
+        end
+    end
+
+    if GLUE.OnAffGiven then
+        for aff in pairs(addedAffs) do GLUE.OnAffGiven(aff) end
+    end
+    if GLUE.OnAfflictionCured and removedAffs.frostbite then
+        GLUE.OnAfflictionCured("frostbite")
+    end
+
+    if #GLUE.state.states > 1 then GLUE.state.Optimize() end
+    if GLUE.UpdateDisplay then GLUE.UpdateDisplay() end
+    if GLUE.OnStateUpdate then GLUE.OnStateUpdate() end
+end
+
 function GLUE.state.GetStatesSummary()
     local summary = string.format("Total states: %d\n", #GLUE.state.states)
     for i, state in ipairs(GLUE.state.states) do
