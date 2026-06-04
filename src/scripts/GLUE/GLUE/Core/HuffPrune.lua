@@ -26,10 +26,20 @@
     Rules B/C/D/E compound; rule A is used for single-aff states instead.
 ]]--
 
-local GRACE       = .5   -- seconds after balance recovery before penalty starts
-local DECAY_K     = 0.5  -- exp decay rate: penalty = exp(-DECAY_K * overtime)
-local MEND_BAL    = 0.8  -- mend salve balance duration (seconds)
-local RESTORE_BAL = 3.8  -- restoration salve balance duration (seconds)
+local GRACE         = 0.5  -- seconds after balance recovery before penalty starts
+local DECAY_K       = 0.5  -- exp decay rate: penalty = exp(-DECAY_K * overtime)
+local MEND_BAL      = 0.8  -- mend salve balance duration (seconds)
+local RESTORE_BAL   = 3.8  -- restoration salve balance duration (seconds)
+
+-- Salve is applied manually and the balance window is very short (0.8s), so legitimate
+-- gaps between applies are common. Use a wider grace window before penalizing to avoid
+-- false positives from normal curing rhythm.
+local SALVE_GRACE   = GRACE * 2
+
+-- Beyond this age, salve_time/restore_time are too stale to be meaningful — we may have
+-- simply missed the trigger, or the target switched to a different curing strategy.
+-- Treat as unobserved rather than applying an ever-growing penalty.
+local MAX_SALVE_AGE = 10.0
 
 -- Lookup tables built lazily on first tick (AfflictionMaps loads first).
 local herbSet  = nil   -- aff → true for all herb-curable affs
@@ -101,9 +111,9 @@ local function computePenalty(state, herbFree, focusFree, smokeFree, salveFree)
             if methods.herb  and herbFree  > GRACE then overtime = math.max(overtime, herbFree  - GRACE) end
             if methods.focus and focusFree > GRACE then overtime = math.max(overtime, focusFree - GRACE) end
             if methods.smoke and smokeFree > GRACE then overtime = math.max(overtime, smokeFree - GRACE) end
-            if methods.salve and salveFree > GRACE
+            if methods.salve and salveFree > SALVE_GRACE
                 and not affs.slickness and not affs.bloodfire then
-                overtime = math.max(overtime, salveFree - GRACE)
+                overtime = math.max(overtime, salveFree - SALVE_GRACE)
             end
             if overtime > 0 then penalty = math.exp(-DECAY_K * overtime) end
         end
@@ -141,10 +151,10 @@ local function computePenalty(state, herbFree, focusFree, smokeFree, salveFree)
     end
 
     -- Rule E: any salve aff present (mend or restoration), no slickness/bloodfire, shared salve balance free.
-    if not affs.slickness and not affs.bloodfire and salveFree > GRACE then
+    if not affs.slickness and not affs.bloodfire and salveFree > SALVE_GRACE then
         for aff in pairs(affs) do
             if salveSet and salveSet[aff] then
-                penalty = penalty * math.exp(-DECAY_K * (salveFree - GRACE))
+                penalty = penalty * math.exp(-DECAY_K * (salveFree - SALVE_GRACE))
                 break
             end
         end
@@ -258,6 +268,9 @@ GLUE.huff.Register(function()
         return
     end
 
+    -- No branching to resolve with a single state; skip penalty computation.
+    if #GLUE.state.states <= 1 then return end
+
     local herbFree  = GLUE.balance.FreeFor("herb")
     local focusFree = GLUE.balance.FreeFor("focus")
     local smokeFree = GLUE.balance.FreeFor("smoke")
@@ -267,13 +280,18 @@ GLUE.huff.Register(function()
     local anyPenalized = false
     for _, state in ipairs(GLUE.state.states) do
         -- Shared salve balance: whichever apply was more recent determines the lockout duration.
+        -- If neither has ever been set (both 0), or the last apply is stale, salve
+        -- history is unknown — no penalty.
         local lastMend    = state.salve_time   or 0
         local lastRestore = state.restore_time or 0
-        local salveFree
-        if lastRestore > lastMend then
-            salveFree = math.max(0, now - lastRestore - RESTORE_BAL)
-        else
-            salveFree = math.max(0, now - lastMend - MEND_BAL)
+        local salveFree = 0
+        local lastApply = math.max(lastMend, lastRestore)
+        if lastApply > 0 and (now - lastApply) <= MAX_SALVE_AGE then
+            if lastRestore > lastMend then
+                salveFree = math.max(0, now - lastRestore - RESTORE_BAL)
+            else
+                salveFree = math.max(0, now - lastMend - MEND_BAL)
+            end
         end
         local p = computePenalty(state, herbFree, focusFree, smokeFree, salveFree)
         if p < 1.0 then
@@ -322,6 +340,16 @@ GLUE.huff.Register(function()
     end
 
     if pruned then
+        -- Safety: never empty the state list. If everything fell below threshold,
+        -- keep the highest-weight state rather than losing all tracking.
+        if #remaining == 0 then
+            local best = GLUE.state.states[1]
+            for _, s in ipairs(GLUE.state.states) do
+                if (s.prob or 0) > (best.prob or 0) then best = s end
+            end
+            remaining = { best }
+            prunedCount = prunedCount - 1
+        end
         if not GLUE.config.debug and (GLUE.config.echos) then
             GLUE.queueEcho(string.format("\n<red>[GLUE Huff]<reset> Pruned %d states (%d remaining)",
                 prunedCount, #remaining))
