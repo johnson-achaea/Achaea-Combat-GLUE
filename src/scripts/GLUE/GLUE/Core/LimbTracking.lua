@@ -133,6 +133,7 @@ function GLUE.limbs.HandleRestorationCure(name, area)
     local limbMap = {
         head  = {"head"},
         torso = {"torso"},
+        body  = {"torso"},
         arms  = {"left arm", "right arm"},
         legs  = {"left leg", "right leg"},
     }
