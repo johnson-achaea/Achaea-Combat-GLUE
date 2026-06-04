@@ -123,7 +123,8 @@ function GLUE.cure.Salve(location)
                 end
                 if GLUE.config.debug then
                     if #curableInState == 1 then
-                        GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]), "cured")
+                        local _col = GLUE.affs and GLUE.affs.colorMap and GLUE.affs.colorMap[curableInState[1]] or "white"
+                        GLUE.queueEcho(string.format("\n<red>[GLUE]<reset> -%s%s<reset>", "<" .. _col .. ">", curableInState[1]), "removed")
                     else
                         GLUE.queueEcho(string.format("\n<cyan>[GLUE]<reset> Branched salve cure: %d possibilities",
                             #curableInState), "branched")

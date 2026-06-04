@@ -120,7 +120,8 @@ function GLUE.cure.ApplyTiered(priorityTable)
             if #curableInState == 1 then
                 table.insert(branches, buildCuredState(state, curableInState[1]))
                 if GLUE.config.echos or GLUE.config.debug then
-                    GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]), "cured")
+                    local _col = GLUE.affs and GLUE.affs.colorMap and GLUE.affs.colorMap[curableInState[1]] or "white"
+                    GLUE.queueEcho(string.format("\n<red>[GLUE]<reset> -%s%s<reset>", "<" .. _col .. ">", curableInState[1]), "removed")
                 end
             else
                 for _, curedAff in ipairs(curableInState) do

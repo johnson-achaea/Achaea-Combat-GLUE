@@ -29,7 +29,6 @@ GLUE.config = GLUE.config or {
     -- Debug mode bypasses all collapsing.
     maxEchos = {
         general  = 3,  -- fallback for any categorized message type
-        cured    = 3,
         branched = 3,
         removed  = 3,
     },
