@@ -19,29 +19,37 @@
       B) Herb aff present, no anorexia, herb balance free.
       C) Focus aff present, no impatience, focus balance free.
       D) Smoke aff present, no asthma, smoke balance free.
+      E) Any salve aff present (mend or restoration), no slickness/bloodfire, shared salve
+         balance free. Per-state: uses whichever apply (salve_time/restore_time) was most
+         recent and its corresponding lockout (0.8s mend, 3.8s restoration).
 
-    Rules B/C/D compound; rule A is used for single-aff states instead.
+    Rules B/C/D/E compound; rule A is used for single-aff states instead.
 ]]--
 
-local GRACE   = .5  -- seconds after balance recovery before penalty starts
-local DECAY_K = 0.5  -- exp decay rate: penalty = exp(-DECAY_K * overtime)
+local GRACE       = .5   -- seconds after balance recovery before penalty starts
+local DECAY_K     = 0.5  -- exp decay rate: penalty = exp(-DECAY_K * overtime)
+local MEND_BAL    = 0.8  -- mend salve balance duration (seconds)
+local RESTORE_BAL = 3.8  -- restoration salve balance duration (seconds)
 
 -- Lookup tables built lazily on first tick (AfflictionMaps loads first).
 local herbSet  = nil   -- aff → true for all herb-curable affs
 local focusSet = nil   -- aff → true for all focus-curable affs
 local smokeSet = nil   -- aff → true for all smoke-curable affs
-local cureOf   = nil   -- aff → { herb=true, focus=true, smoke=true, tree=true }
+local salveSet = nil   -- aff → true for all salve-curable affs (mend + restoration, shared balance)
+local cureOf   = nil   -- aff → { herb=true, focus=true, smoke=true, salve=true }
 
 local function buildTables()
     herbSet  = {}
     focusSet = {}
     smokeSet = {}
+    salveSet = {}
     cureOf   = {}
 
     local function mark(aff, method)
         herbSet[aff]  = herbSet[aff]  or (method == "herb")
         focusSet[aff] = focusSet[aff] or (method == "focus")
         smokeSet[aff] = smokeSet[aff] or (method == "smoke")
+        salveSet[aff] = salveSet[aff] or (method == "salve")
         cureOf[aff]   = cureOf[aff] or {}
         cureOf[aff][method] = true
     end
@@ -51,15 +59,28 @@ local function buildTables()
     end
     for _, aff in ipairs(GLUE.affs.focus) do mark(aff, "focus") end
     for _, aff in ipairs(GLUE.affs.smoke) do mark(aff, "smoke") end
+
+    -- Salve (shared balance): all non-position-marker affs from salve tables + restore_list.
+    local positionMarkers = { torso = true, head = true }
+    for _, affList in pairs(GLUE.affs.salve) do
+        for _, aff in ipairs(affList) do
+            if not positionMarkers[aff] and GLUE.affs.list[aff] then
+                mark(aff, "salve")
+            end
+        end
+    end
+    for _, aff in ipairs(GLUE.affs.restore_list or {}) do
+        if GLUE.affs.list[aff] then mark(aff, "salve") end
+    end
     -- tree intentionally excluded: targets may hold tree for strategic reasons
 end
 
 local PRUNE_THRESHOLD = 0.01
 
 -- Returns a penalty multiplier in (0, 1]: 1.0 = no penalty.
--- Single-aff states use rule A only; multi-aff states use rules B/C/D,
+-- Single-aff states use rule A only; multi-aff states use rules B/C/D/E,
 -- compounding independently (multiply) for each firing rule.
-local function computePenalty(state, herbFree, focusFree, smokeFree)
+local function computePenalty(state, herbFree, focusFree, smokeFree, salveFree)
     local affs    = state.affs
     local penalty = 1.0
 
@@ -80,6 +101,10 @@ local function computePenalty(state, herbFree, focusFree, smokeFree)
             if methods.herb  and herbFree  > GRACE then overtime = math.max(overtime, herbFree  - GRACE) end
             if methods.focus and focusFree > GRACE then overtime = math.max(overtime, focusFree - GRACE) end
             if methods.smoke and smokeFree > GRACE then overtime = math.max(overtime, smokeFree - GRACE) end
+            if methods.salve and salveFree > GRACE
+                and not affs.slickness and not affs.bloodfire then
+                overtime = math.max(overtime, salveFree - GRACE)
+            end
             if overtime > 0 then penalty = math.exp(-DECAY_K * overtime) end
         end
         return penalty
@@ -110,6 +135,16 @@ local function computePenalty(state, herbFree, focusFree, smokeFree)
         for aff in pairs(affs) do
             if smokeSet[aff] then
                 penalty = penalty * math.exp(-DECAY_K * (smokeFree - GRACE))
+                break
+            end
+        end
+    end
+
+    -- Rule E: any salve aff present (mend or restoration), no slickness/bloodfire, shared salve balance free.
+    if not affs.slickness and not affs.bloodfire and salveFree > GRACE then
+        for aff in pairs(affs) do
+            if salveSet and salveSet[aff] then
+                penalty = penalty * math.exp(-DECAY_K * (salveFree - GRACE))
                 break
             end
         end
@@ -226,11 +261,21 @@ GLUE.huff.Register(function()
     local herbFree  = GLUE.balance.FreeFor("herb")
     local focusFree = GLUE.balance.FreeFor("focus")
     local smokeFree = GLUE.balance.FreeFor("smoke")
+    local now       = os.clock()
 
     -- Step 1: Apply exponential-decay penalty to each implausible state.
     local anyPenalized = false
     for _, state in ipairs(GLUE.state.states) do
-        local p = computePenalty(state, herbFree, focusFree, smokeFree)
+        -- Shared salve balance: whichever apply was more recent determines the lockout duration.
+        local lastMend    = state.salve_time   or 0
+        local lastRestore = state.restore_time or 0
+        local salveFree
+        if lastRestore > lastMend then
+            salveFree = math.max(0, now - lastRestore - RESTORE_BAL)
+        else
+            salveFree = math.max(0, now - lastMend - MEND_BAL)
+        end
+        local p = computePenalty(state, herbFree, focusFree, smokeFree, salveFree)
         if p < 1.0 then
             state.prob = (state.prob or 1) * p
             anyPenalized = true

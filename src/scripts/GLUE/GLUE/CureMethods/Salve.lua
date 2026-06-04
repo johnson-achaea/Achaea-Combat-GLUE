@@ -101,33 +101,34 @@ function GLUE.cure.Salve(location)
                 end
             end
 
-            -- Always include the fake-apply possibility (salve did nothing).
-            local branches = {}
-            table.insert(branches, GLUE.state.CopyState(state))
+            local baseProb = state.prob or 1
+            local wasteWeight = GLUE.config.wastePenalty or 0.1
 
-            if #curableInState == 1 then
-                local newState = GLUE.state.CopyState(state)
-                newState.affs[curableInState[1]] = nil
-                table.insert(branches, newState)
-                if GLUE.config.debug then
-                    GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]))
-                end
-            elseif #curableInState > 1 then
-                for _, curedAff in ipairs(curableInState) do
-                    local newState = GLUE.state.CopyState(state)
-                    newState.affs[curedAff] = nil
-                    table.insert(branches, newState)
-                end
-                if GLUE.config.debug then
-                    GLUE.queueEcho(string.format("\n<cyan>[GLUE]<reset> Branched salve cure: %d possibilities",
-                        #curableInState))
-                end
-            end
-
-            local branchProb = (state.prob or 1) / #branches
-            for _, s in ipairs(branches) do
-                s.prob = branchProb
+            if #curableInState == 0 then
+                -- Salve applied but nothing curable in this state: penalize
+                local s = GLUE.state.CopyState(state)
+                s.prob = baseProb * wasteWeight
                 table.insert(newStates, s)
+            else
+                -- Waste branch gets wastePenalty weight; each cure branch gets weight 1
+                local totalWeight = #curableInState + wasteWeight
+                local wasteState = GLUE.state.CopyState(state)
+                wasteState.prob = baseProb * wasteWeight / totalWeight
+                table.insert(newStates, wasteState)
+                for _, curedAff in ipairs(curableInState) do
+                    local cureState = GLUE.state.CopyState(state)
+                    cureState.affs[curedAff] = nil
+                    cureState.prob = baseProb / totalWeight
+                    table.insert(newStates, cureState)
+                end
+                if GLUE.config.debug then
+                    if #curableInState == 1 then
+                        GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]))
+                    else
+                        GLUE.queueEcho(string.format("\n<cyan>[GLUE]<reset> Branched salve cure: %d possibilities",
+                            #curableInState))
+                    end
+                end
             end
         end
 
