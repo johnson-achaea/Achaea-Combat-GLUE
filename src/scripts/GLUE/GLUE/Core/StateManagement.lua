@@ -462,9 +462,15 @@ function GLUE.state.Optimize()
     if #GLUE.state.states > 1 then
         GLUE.state.RemoveDuplicates()
     end
-    -- When fully resolved to one state, check for fake-apply history.
-    if #GLUE.state.states == 1 and GLUE.state.states[1].has_fake_apply and GLUE.target.name then
-        GLUE.recordFakeApplier(GLUE.target.name)
+    -- When fully resolved to one state, record fake-apply history then clear the flag.
+    if #GLUE.state.states == 1 then
+        local s = GLUE.state.states[1]
+        if s.has_fake_apply then
+            if GLUE.target.name and GLUE.target.name ~= "" then
+                GLUE.recordFakeApplier(GLUE.target.name)
+            end
+            s.has_fake_apply = nil
+        end
     end
 end
 

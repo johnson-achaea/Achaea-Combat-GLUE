@@ -6,9 +6,7 @@
     balances are available in that state's history. One timer per apply resolves
     restoration branches keyed by apply_id.
 
-    Balance constants (seconds):
-        Mending     — salve   balance: 0.8s
-        Restoration — restore balance: 3.8s
+    Balance durations come from GLUE.balance.durations (salve / restore).
 ]]--
 
 if not GLUE or not GLUE.IsTarget then return end
@@ -27,13 +25,22 @@ if not affsList then
     return
 end
 
+local now = os.clock()
+
+-- Gate: the game enforces a single shared salve balance across all locations.
+-- Ignore triggers that fire within the salve balance window of the last processed apply.
+GLUE.salve_lastApplyAt = GLUE.salve_lastApplyAt or 0
+if now - GLUE.salve_lastApplyAt < GLUE.balance.durations.salve then
+    if GLUE.config.debug then
+        cecho(string.format("\n<yellow>[GLUE]<reset> Ignored rapid salve (%.2fs since last)", now - GLUE.salve_lastApplyAt))
+    end
+    return
+end
+GLUE.salve_lastApplyAt = now
+
 -- Seeing a salve apply proves slickness/bloodfire are absent.
 GLUE.state.PruneStatesWithAffliction("bloodfire")
 GLUE.state.PruneStatesWithAffliction("slickness")
-
-local MEND_BAL         = 0.8
-local RESTORE_BAL      = 3.8
-local now              = os.clock()
 local apply_id         = now
 -- Known fake appliers are expected to mend with nothing — don't penalise empty mend branches.
 local isFaker          = GLUE.isFakeApplier and GLUE.isFakeApplier(targetName)
@@ -68,8 +75,8 @@ for _, state in ipairs(GLUE.state.states) do
     local salveElapsed   = now - (state.salve_time   or 0)
     local restoreElapsed = now - (state.restore_time  or 0)
 
-    local canMend    = salveElapsed   >= MEND_BAL
-    local canRestore = restoreElapsed >= RESTORE_BAL and not state.pending_restore
+    local canMend    = salveElapsed   >= GLUE.balance.durations.salve
+    local canRestore = restoreElapsed >= GLUE.balance.durations.restore and not state.pending_restore
 
     if not canMend and not canRestore then
         -- Apply is impossible given this state's balance history — waste penalty.
@@ -121,7 +128,7 @@ if GLUE.UpdateDisplay  then GLUE.UpdateDisplay()   end
 
 -- One timer per apply: resolves all restoration branches carrying this apply_id.
 local timerId
-timerId = tempTimer(RESTORE_BAL, function()
+timerId = tempTimer(GLUE.balance.durations.restore, function()
     GLUE.cure.RestorationComplete(location, apply_id)
     -- Remove from tracking table
     if GLUE.restore_timers then
