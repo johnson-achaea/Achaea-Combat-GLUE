@@ -65,13 +65,16 @@ function GLUE.state.TickTimedAfflictions()
 end
 
 -- Echo buffer: deduplicate repeated messages, flushed on the prompt trigger.
-local echoBuffer = {}
-local echoSet    = {}
+-- Optional category tag groups consecutive same-category messages; runs longer
+-- than ECHO_COLLAPSE_AT are collapsed to the first message + "...+N more".
+local echoBuffer       = {}
+local echoSet          = {}
+local ECHO_COLLAPSE_AT = 3
 
-local function queueEcho(msg)
+local function queueEcho(msg, cat)
     if not echoSet[msg] then
         echoSet[msg] = true
-        table.insert(echoBuffer, msg)
+        table.insert(echoBuffer, { msg = msg, cat = cat })
     end
 end
 
@@ -91,8 +94,38 @@ function GLUE.OnAfflictionCured(affliction)
     end
 end
 
+local function echoThreshold(cat)
+    local cfg = GLUE.config and GLUE.config.maxEchos
+    if type(cfg) == "number" then return cfg end
+    if type(cfg) == "table"  then return cfg[cat] or cfg.general or ECHO_COLLAPSE_AT end
+    return ECHO_COLLAPSE_AT
+end
+
 function GLUE.FlushEchoBuffer()
-    for _, m in ipairs(echoBuffer) do cecho(m) end
+    if GLUE.config and GLUE.config.debug then
+        for _, e in ipairs(echoBuffer) do cecho(e.msg) end
+    else
+        local i = 1
+        while i <= #echoBuffer do
+            local e = echoBuffer[i]
+            if not e.cat then
+                cecho(e.msg)
+                i = i + 1
+            else
+                local j = i + 1
+                while j <= #echoBuffer and echoBuffer[j].cat == e.cat do j = j + 1 end
+                local count    = j - i
+                local maxShow  = echoThreshold(e.cat)
+                if count <= maxShow then
+                    for k = i, j - 1 do cecho(echoBuffer[k].msg) end
+                else
+                    for k = i, i + maxShow - 1 do cecho(echoBuffer[k].msg) end
+                    cecho(string.format("\n<yellow>[GLUE]<reset> ...+%d more", count - maxShow))
+                end
+                i = j
+            end
+        end
+    end
     echoBuffer = {}
     echoSet    = {}
 end

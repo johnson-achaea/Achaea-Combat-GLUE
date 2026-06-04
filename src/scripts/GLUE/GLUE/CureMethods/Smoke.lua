@@ -89,7 +89,7 @@ function GLUE.cure.Smoke()
             newState.affs[curableInState[1]] = nil
             table.insert(branches, newState)
             if GLUE.config.echos or GLUE.config.debug then
-                GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]))
+                GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]), "cured")
             end
 
         else
@@ -107,7 +107,7 @@ function GLUE.cure.Smoke()
             for _, a in ipairs(curableInState) do table.insert(options, a) end
             if spiritStacks then table.insert(options, "spirit-1") end
             if GLUE.config.echos or GLUE.config.debug then
-                GLUE.queueEcho(string.format("\n<cyan>[GLUE]<reset> Smoke: %s", table.concat(options, "/")))
+                GLUE.queueEcho(string.format("\n<cyan>[GLUE]<reset> Smoke: %s", table.concat(options, "/")), "branched")
             end
         end
 

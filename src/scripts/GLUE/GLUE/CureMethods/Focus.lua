@@ -54,7 +54,7 @@ function GLUE.cure.Focus()
             newState.affs[curableInState[1]] = nil
             table.insert(branches, newState)
             if GLUE.config.echos or GLUE.config.debug then
-                GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]))
+                GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]), "cured")
             end
         else
             for _, curedAff in ipairs(curableInState) do
@@ -64,7 +64,7 @@ function GLUE.cure.Focus()
             end
             if GLUE.config.echos or GLUE.config.debug then
                 GLUE.queueEcho(string.format("\n<cyan>[GLUE]<reset> Focus: %s",
-                    table.concat(curableInState, "/")))
+                    table.concat(curableInState, "/")), "branched")
             end
         end
 

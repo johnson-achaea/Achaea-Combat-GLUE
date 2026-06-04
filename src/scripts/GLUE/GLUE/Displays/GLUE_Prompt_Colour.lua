@@ -6,7 +6,7 @@
 GLUE.RegisterOnAfflictionCured("display", function(affliction)
     if GLUE.config.echos or GLUE.config.debug then
         local col = GLUE.affs and GLUE.affs.colorMap and GLUE.affs.colorMap[affliction] or "white"
-        GLUE.queueEcho(string.format("\n<red>[GLUE]<reset> -%s%s<reset>", "<" .. col .. ">", affliction))
+        GLUE.queueEcho(string.format("\n<red>[GLUE]<reset> -%s%s<reset>", "<" .. col .. ">", affliction), "removed")
     end
 end)
 
@@ -16,7 +16,7 @@ local limbGroups = {
   { broken="brokenrightleg", damaged="damagedrightleg", mangled="mangledrightleg", abbrevs={"rl", "RL", "MRL"} },
   { broken="brokenleftarm",  damaged="damagedleftarm",  mangled="mangledleftarm",  abbrevs={"la", "LA", "MLA"} },
   { broken="brokenrightarm", damaged="damagedrightarm", mangled="mangledrightarm", abbrevs={"ra", "RA", "MRA"} },
-  {                          damaged="damagedhead",     mangled="mangledhead",     abbrevs={nil,  "hd", "Mhd"} },
+  {                          damaged="damagedhead",     mangled="mangledhead",     abbrevs={nil,  "H", "MH"} },
 }
 local limbAffSet = {}
 for _, g in ipairs(limbGroups) do

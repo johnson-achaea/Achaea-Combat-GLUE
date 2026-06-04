@@ -75,7 +75,7 @@ function GLUE.cure.Herb(herbName)
             if linked then for a in pairs(linked) do newState.affs[a] = nil end end
             table.insert(branches, newState)
             if GLUE.config.echos or GLUE.config.debug then
-                GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curedAff))
+                GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curedAff), "cured")
             end
         else
             for _, curedAff in ipairs(curableInState) do
@@ -87,7 +87,7 @@ function GLUE.cure.Herb(herbName)
             end
             if GLUE.config.echos or GLUE.config.debug then
                 GLUE.queueEcho(string.format("\n<cyan>[GLUE]<reset> Herb: %s",
-                    table.concat(curableInState, "/")))
+                    table.concat(curableInState, "/")), "branched")
             end
         end
 

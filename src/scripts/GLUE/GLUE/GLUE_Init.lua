@@ -19,10 +19,20 @@ GLUE.name = "Good Luck Understanding Everything"
 
 -- Core configuration
 GLUE.config = GLUE.config or {
-    maxStates = 500,     -- Maximum number of states before consolidation
-    debug = false,        -- Enable verbose debug output (all state changes)
-    echos = true,         -- Show short aff/cure/limb change messages only
-    wastePenalty = 0.4,  -- Probability multiplier for states where a cure had nothing to cure
+    maxStates    = 500,   -- Maximum number of states before consolidation
+    debug        = false, -- Enable verbose debug output (all state changes)
+    echos        = true,  -- Show short aff/cure/limb change messages only
+    wastePenalty = 0.4,   -- Probability multiplier for states where a cure had nothing to cure
+    -- Echo collapsing: consecutive messages of the same category are shown individually
+    -- up to the category's limit, then collapsed to first + "...+N more".
+    -- Override per-category or set "general" as the fallback.
+    -- Debug mode bypasses all collapsing.
+    maxEchos = {
+        general  = 3,  -- fallback for any categorized message type
+        cured    = 3,
+        branched = 3,
+        removed  = 3,
+    },
 }
 
 -- Illusion suppression

@@ -120,7 +120,7 @@ function GLUE.cure.ApplyTiered(priorityTable)
             if #curableInState == 1 then
                 table.insert(branches, buildCuredState(state, curableInState[1]))
                 if GLUE.config.echos or GLUE.config.debug then
-                    GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]))
+                    GLUE.queueEcho(string.format("\n<green>[GLUE]<reset> Cured %s", curableInState[1]), "cured")
                 end
             else
                 for _, curedAff in ipairs(curableInState) do
@@ -128,7 +128,7 @@ function GLUE.cure.ApplyTiered(priorityTable)
                 end
                 if GLUE.config.echos or GLUE.config.debug then
                     GLUE.queueEcho(string.format("\n<cyan>[GLUE]<reset> Branched cure (tier %d): %s",
-                        bestTier, table.concat(curableInState, "/")))
+                        bestTier, table.concat(curableInState, "/")), "branched")
                 end
             end
         end
