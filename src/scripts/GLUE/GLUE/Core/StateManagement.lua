@@ -377,10 +377,11 @@ local function generateStateHash(state)
     local pr = state.pending_restore
         and (state.pending_restore.location .. "@" .. tostring(state.pending_restore.apply_id))
         or "nil"
+    -- salve_time/restore_time are timing metadata, not state identity.
+    -- Excluding them lets RemoveDuplicates merge empty-aff fake-apply branches
+    -- that would otherwise accumulate indefinitely with different timestamps.
     return table.concat(affList, "|")
         .. ":bleed=" .. tostring(state.bleed or 0)
-        .. ":st="    .. tostring(state.salve_time   or 0)
-        .. ":rt="    .. tostring(state.restore_time  or 0)
         .. ":pr="    .. pr
 end
 
