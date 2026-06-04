@@ -344,13 +344,19 @@ GLUE.affs.tree = {
 
 -- Salve (apply) cures - includes both mending (1s) and restoration (4s) afflictions
 GLUE.affs.salve = {
-    ["body"] = {"torso", "itching", "anorexia", "frozen", "burning", "noinsulation", "notemperance", "selarnia"},
-    ["skin"] = {"frostbite", "anorexia", "frozen", "noinsulation", "selarnia"},
+    ["body"] = {"torso", "itching", "anorexia", "frozen", "shivering", "burning", "noinsulation", "notemperance", "selarnia"},
+    ["skin"] = {"anorexia", "frozen", "shivering", "noinsulation", "selarnia"},
     ["torso"] = {"calcifiedtorso", "anorexia", "torso", "burning", "hypothermia", "selarnia", "mildtrauma", "serioustrauma"},
     ["head"] = {"calcifiedhead", "stuttering", "head", "crushedthroat", "damagedhead", "mangledhead"},
     ["arms"] = {"brokenleftarm", "brokenrightarm", "damagedleftarm", "damagedrightarm", "mangledleftarm", "mangledrightarm"},
     ["legs"] = {"brokenleftleg", "brokenrightleg", "damagedleftleg", "damagedrightleg", "mangledleftleg", "mangledrightleg"},
     ["ears"] = {"head"},
+}
+
+-- Ordered salve chains: when multiple members are curable, always cure the highest-priority one.
+-- Each chain is listed highest → lowest priority.
+GLUE.affs.salve_chains = {
+    freeze = {"frozen", "shivering", "noinsulation"},
 }
 
 -- Restoration salve progression (4s restore balance)

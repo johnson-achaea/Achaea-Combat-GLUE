@@ -80,6 +80,27 @@ function GLUE.cure.Salve(location)
                 end
             end
 
+            -- For chained affs (e.g. freeze chain), only keep the highest-priority
+            -- chain member so the cure is deterministic rather than branched.
+            for _, chain in pairs(GLUE.affs.salve_chains or {}) do
+                local chainIdx = {}
+                for i, aff in ipairs(chain) do chainIdx[aff] = i end
+                local bestIdx = nil
+                for _, aff in ipairs(curableInState) do
+                    local i = chainIdx[aff]
+                    if i and (not bestIdx or i < bestIdx) then bestIdx = i end
+                end
+                if bestIdx then
+                    local filtered = {}
+                    for _, aff in ipairs(curableInState) do
+                        if not chainIdx[aff] or chainIdx[aff] == bestIdx then
+                            table.insert(filtered, aff)
+                        end
+                    end
+                    curableInState = filtered
+                end
+            end
+
             -- Always include the fake-apply possibility (salve did nothing).
             local branches = {}
             table.insert(branches, GLUE.state.CopyState(state))
