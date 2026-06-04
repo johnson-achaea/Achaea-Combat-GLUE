@@ -344,9 +344,9 @@ GLUE.affs.tree = {
 
 -- Salve (apply) cures - includes both mending (1s) and restoration (4s) afflictions
 GLUE.affs.salve = {
-    ["body"] = {"torso", "itching", "anorexia", "frozen", "shivering", "burning", "noinsulation", "notemperance", "selarnia", "mildtrauma", "serioustrauma"},
+    ["body"] = {"torso", "itching", "anorexia", "frozen", "shivering", "burning", "noinsulation", "notemperance", "selarnia", "hypothermia", "mildtrauma", "serioustrauma"},
     ["skin"] = {"anorexia", "frozen", "shivering", "noinsulation", "selarnia"},
-    ["torso"] = {"calcifiedtorso", "anorexia", "torso", "burning", "hypothermia", "selarnia", "mildtrauma", "serioustrauma"},
+    ["torso"] = {"mildtrauma", "serioustrauma", "calcifiedtorso"},
     ["head"] = {"calcifiedhead", "stuttering", "head", "crushedthroat", "damagedhead", "mangledhead"},
     ["arms"] = {"brokenleftarm", "brokenrightarm", "damagedleftarm", "damagedrightarm", "mangledleftarm", "mangledrightarm"},
     ["legs"] = {"brokenleftleg", "brokenrightleg", "damagedleftleg", "damagedrightleg", "mangledleftleg", "mangledrightleg"},
