@@ -11,4 +11,4 @@ GLUE.state.ForEachState(function(state, added)
     end
 end)
 local r = GLUE.integration.IHaveDefense("rupturesight")
-GLUE.state.AddBleedPerState(r and 26 or 15, r and 26 or 15)
+GLUE.state.AddBleedPerState(r and 33 or 25, r and 33 or 25)
