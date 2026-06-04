@@ -33,24 +33,35 @@ function GLUE.limbs.AddHit(name, limb, amount)
     -- Convert limb name to affliction suffix (e.g., "left arm" -> "leftarm")
     local limbSuffix = limb:gsub(" ", "")
 
-    -- Check if we crossed the >200% threshold (mangled)
+    -- Check if we crossed the >200% threshold (mangled / serioustrauma)
     if oldDamage <= 200 and newDamage > 200 then
-        GLUE.state.AddAffliction("mangled" .. limbSuffix)
-        GLUE.state.RemoveAffliction("damaged" .. limbSuffix)
+        if limb == "torso" then
+            GLUE.state.AddAffliction("serioustrauma")
+            GLUE.state.RemoveAffliction("mildtrauma")
+        else
+            GLUE.state.AddAffliction("mangled" .. limbSuffix)
+            GLUE.state.RemoveAffliction("damaged" .. limbSuffix)
+        end
         GLUE.limbs.damage[name][limb] = 200.1
         if GLUE.config.echos or GLUE.config.debug then
-            cecho(string.format("\n<red>--- %s MANGLED! (>200%%) ---", limb:upper()))
+            local label = (limb == "torso") and "SERIOUS TRAUMA" or (limb:upper() .. " MANGLED")
+            cecho(string.format("\n<red>--- %s! (>200%%) ---", label))
         end
-    -- Check if we crossed the >100% threshold (damaged)
+    -- Check if we crossed the >100% threshold (damaged / mildtrauma)
     elseif oldDamage <= 100 and newDamage > 100 then
-        GLUE.state.AddAffliction("damaged" .. limbSuffix)
-        GLUE.state.RemoveAffliction("broken" .. limbSuffix)
-        GLUE.limbs.damage[name][limb] = 100.1
-        if limb == "head" then
-            GLUE.state.AddAffliction("stupidity")
+        if limb == "torso" then
+            GLUE.state.AddAffliction("mildtrauma")
+        else
+            GLUE.state.AddAffliction("damaged" .. limbSuffix)
+            GLUE.state.RemoveAffliction("broken" .. limbSuffix)
+            if limb == "head" then
+                GLUE.state.AddAffliction("stupidity")
+            end
         end
+        GLUE.limbs.damage[name][limb] = 100.1
         if GLUE.config.echos or GLUE.config.debug then
-            cecho(string.format("\n<red>--- %s DAMAGED! (>100%%) ---", limb:upper()))
+            local label = (limb == "torso") and "MILD TRAUMA" or (limb:upper() .. " DAMAGED")
+            cecho(string.format("\n<red>--- %s! (>100%%) ---", label))
         end
     end
 
@@ -87,17 +98,24 @@ function GLUE.limbs.ResetLimb(name, limb)
     local currentDamage = GLUE.limbs.damage[name] and GLUE.limbs.damage[name][limb] or 0
 
     if currentDamage > 200 then
-        -- Mangled -> damaged
         GLUE.limbs.damage[name][limb] = 100
-        GLUE.state.RemoveAffliction("mangled" .. limbSuffix)
-        GLUE.state.AddAffliction("damaged" .. limbSuffix)
+        if limb == "torso" then
+            GLUE.state.RemoveAffliction("serioustrauma")
+            GLUE.state.AddAffliction("mildtrauma")
+        else
+            GLUE.state.RemoveAffliction("mangled" .. limbSuffix)
+            GLUE.state.AddAffliction("damaged" .. limbSuffix)
+        end
     else
-        -- Damaged/broken -> cured
         if GLUE.limbs.damage[name] then
             GLUE.limbs.damage[name][limb] = 0
         end
-        GLUE.state.RemoveAffliction("damaged" .. limbSuffix)
-        GLUE.state.RemoveAffliction("broken" .. limbSuffix)
+        if limb == "torso" then
+            GLUE.state.RemoveAffliction("mildtrauma")
+        else
+            GLUE.state.RemoveAffliction("damaged" .. limbSuffix)
+            GLUE.state.RemoveAffliction("broken" .. limbSuffix)
+        end
     end
 
     if GLUE.config.echos or GLUE.config.debug then
@@ -136,12 +154,14 @@ function GLUE.limbs.HandleRestorationCure(name, area)
             if damage > 200 then
                 GLUE.limbs.damage[name][limb] = 100
                 if GLUE.config.echos or GLUE.config.debug then
-                    cecho(string.format("\n<cyan>[GLUE]<reset> Resto: %s's %s mangled→damaged", name, limb))
+                    local label = (limb == "torso") and "serioustrauma→mildtrauma" or (limb .. " mangled→damaged")
+                    cecho(string.format("\n<cyan>[GLUE]<reset> Resto: %s's %s", name, label))
                 end
             else
                 GLUE.limbs.damage[name][limb] = 0
                 if GLUE.config.echos or GLUE.config.debug then
-                    cecho(string.format("\n<cyan>[GLUE]<reset> Resto: %s's %s damaged→cured", name, limb))
+                    local label = (limb == "torso") and "mildtrauma→cured" or (limb .. " damaged→cured")
+                    cecho(string.format("\n<cyan>[GLUE]<reset> Resto: %s's %s", name, label))
                 end
             end
 
@@ -172,7 +192,7 @@ function GLUE.limbs.ResetAll(name)
 
     -- Clear all timers for this target
     if GLUE.limbs.timers[name] then
-        for limb, timerData in pairs(GLUE.limbs.timers[name]) do
+        for _, timerData in pairs(GLUE.limbs.timers[name]) do
             if timerData and timerData.id then
                 killTimer(timerData.id)
             end
@@ -264,7 +284,7 @@ function GLUE.limbs.CancelTimers(name)
     name = name:lower():title()
 
     if GLUE.limbs.timers[name] then
-        for limb, timerData in pairs(GLUE.limbs.timers[name]) do
+        for _, timerData in pairs(GLUE.limbs.timers[name]) do
             if timerData and timerData.id then
                 killTimer(timerData.id)
             end
