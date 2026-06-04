@@ -98,7 +98,7 @@ function GLUE.limbs.ResetLimb(name, limb)
     local currentDamage = GLUE.limbs.damage[name] and GLUE.limbs.damage[name][limb] or 0
 
     if currentDamage > 200 then
-        GLUE.limbs.damage[name][limb] = 100
+        GLUE.limbs.damage[name][limb] = 100.1
         if limb == "torso" then
             GLUE.state.RemoveAffliction("serioustrauma")
             GLUE.state.AddAffliction("mildtrauma")
@@ -152,7 +152,7 @@ function GLUE.limbs.HandleRestorationCure(name, area)
             end
 
             if damage > 200 then
-                GLUE.limbs.damage[name][limb] = 100
+                GLUE.limbs.damage[name][limb] = 100.1
                 if GLUE.config.echos or GLUE.config.debug then
                     local label = (limb == "torso") and "serioustrauma→mildtrauma" or (limb .. " mangled→damaged")
                     cecho(string.format("\n<cyan>[GLUE]<reset> Resto: %s's %s", name, label))
