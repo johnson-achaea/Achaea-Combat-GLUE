@@ -55,6 +55,10 @@
                      {
                             "pattern": "^You see that (\\w+) is at (.+)\\.$",
                             "type": "regex"
+                     },
+                     {
+                            "pattern": "^You seek out the mind of (\\w+) and an image of (.+) appears in your mind\\.$",
+                            "type": "regex"
                      }
               ],
               "script": ""
