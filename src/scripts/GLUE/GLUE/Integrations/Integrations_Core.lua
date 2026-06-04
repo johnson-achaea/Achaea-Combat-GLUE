@@ -4,14 +4,15 @@ GLUE.integration = GLUE.integration or {}
 -- Returns true if the named player is present in the current room.
 -- Override to use your own room tracking system instead of RA.
 function GLUE.integration.IsTargetInRoom(name)
-    local players = gmcp.Room and gmcp.Room.Players or {}
-    for _, p in ipairs(players) do
-        if p.name == name then return true end
-    end
     if ra and ra.InRoom then
+        local players = gmcp.Room and gmcp.Room.Players or {}
+        for _, p in ipairs(players) do
+            if p.name == name then return true end
+        end
         for _, n in ipairs(ra.InRoom) do
             if n == name then return true end
         end
+        return false
     end
     return true
 end

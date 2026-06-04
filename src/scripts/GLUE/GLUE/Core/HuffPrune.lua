@@ -6,8 +6,8 @@
            penalty = exp(-DECAY_K * (timeFree - GRACE))
          Multiple independent rules compound multiplicatively.
       3. Renormalizes. Computes ESS = 1/Σ(w²).
-      4. If ESS < N/2, hard-prunes states below PRUNE_THRESHOLD
-         and renormalizes again.
+      4. If ESS < N/2, hard-prunes states below PRUNE_THRESHOLD and renormalizes again.
+         Echoes a single summary line (non-debug) or per-state detail (debug).
 
     Penalty rules (all require the relevant balance to have been free
     for more than GRACE seconds — i.e., the target had time to cure):
@@ -75,7 +75,7 @@ local function buildTables()
     -- tree intentionally excluded: targets may hold tree for strategic reasons
 end
 
-local PRUNE_THRESHOLD = 0.01
+local PRUNE_THRESHOLD = 0.005
 
 -- Returns a penalty multiplier in (0, 1]: 1.0 = no penalty.
 -- Single-aff states use rule A only; multi-aff states use rules B/C/D/E,
@@ -288,30 +288,31 @@ GLUE.huff.Register(function()
     GLUE.state.Normalize()
 
     -- Step 3: Compute ESS = 1/Σ(w²). Only hard-prune when ESS < N/2.
-    local N      = #GLUE.state.states
-    local sumSq  = 0
+    local N     = #GLUE.state.states
+    local sumSq = 0
     for _, state in ipairs(GLUE.state.states) do
         local w = state.prob or 0
         sumSq = sumSq + w * w
     end
     local ess = sumSq > 0 and (1.0 / sumSq) or 0
-
     if ess >= N / 2 then return end
 
-    -- Step 4: Hard-prune below threshold, fire OnAfflictionCured for newly-absent affs.
+    -- Step 4: Hard-prune states below threshold, fire OnAfflictionCured for newly-absent affs.
     local wasPresent = {}
     for _, state in ipairs(GLUE.state.states) do
         for aff in pairs(state.affs) do wasPresent[aff] = true end
     end
 
-    local pruned    = false
-    local remaining = {}
+    local pruned      = false
+    local remaining   = {}
+    local prunedCount = 0
     for _, state in ipairs(GLUE.state.states) do
         if (state.prob or 0) >= PRUNE_THRESHOLD then
             table.insert(remaining, state)
         else
             pruned = true
-            if GLUE.config.echos or GLUE.config.debug then
+            prunedCount = prunedCount + 1
+            if GLUE.config.debug then
                 local affNames = {}
                 for aff in pairs(state.affs) do table.insert(affNames, aff) end
                 GLUE.queueEcho(string.format("\n<red>[GLUE Huff]<reset> Pruned (%.0f%%): %s",
@@ -321,6 +322,10 @@ GLUE.huff.Register(function()
     end
 
     if pruned then
+        if not GLUE.config.debug and (GLUE.config.echos) then
+            GLUE.queueEcho(string.format("\n<red>[GLUE Huff]<reset> Pruned %d states (%d remaining)",
+                prunedCount, #remaining))
+        end
         GLUE.state.states = remaining
         GLUE.state.Normalize()
         if GLUE.OnAfflictionCured then
