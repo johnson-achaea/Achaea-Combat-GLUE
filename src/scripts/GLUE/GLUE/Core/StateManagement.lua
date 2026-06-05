@@ -126,8 +126,10 @@ function GLUE.FlushEchoBuffer()
             end
         end
     end
-    echoBuffer = {}
-    echoSet    = {}
+    echoBuffer              = {}
+    echoSet                 = {}
+    GLUE.pendingRestoration = {}
+    GLUE.pendingMending     = {}
 end
 
 function GLUE.state.AddAffliction(affliction, addToRoom)

@@ -38,6 +38,15 @@ if now - GLUE.salve_lastApplyAt < GLUE.balance.durations.salve then
 end
 GLUE.salve_lastApplyAt = now
 
+-- Sapience: if we already know whether this is restoration or mending, suppress the other branch.
+GLUE.pendingRestoration = GLUE.pendingRestoration or {}
+GLUE.pendingMending     = GLUE.pendingMending     or {}
+local _key = targetName:lower()
+local forcedRestoration = (GLUE.pendingRestoration[_key] == location)
+local forcedMending     = (GLUE.pendingMending[_key]     == location)
+if forcedRestoration then GLUE.pendingRestoration[_key] = nil end
+if forcedMending     then GLUE.pendingMending[_key]     = nil end
+
 -- Seeing a salve apply proves slickness/bloodfire are absent.
 GLUE.state.PruneStatesWithAffliction("bloodfire")
 GLUE.state.PruneStatesWithAffliction("slickness")
@@ -75,8 +84,8 @@ for _, state in ipairs(GLUE.state.states) do
     local salveElapsed   = now - (state.salve_time   or 0)
     local restoreElapsed = now - (state.restore_time  or 0)
 
-    local canMend    = salveElapsed   >= GLUE.balance.durations.salve
-    local canRestore = restoreElapsed >= GLUE.balance.durations.restore and not state.pending_restore
+    local canMend    = (not forcedRestoration) and salveElapsed   >= GLUE.balance.durations.salve
+    local canRestore = (not forcedMending)     and restoreElapsed >= GLUE.balance.durations.restore and not state.pending_restore
 
     if not canMend and not canRestore then
         -- Apply is impossible given this state's balance history — waste penalty.
