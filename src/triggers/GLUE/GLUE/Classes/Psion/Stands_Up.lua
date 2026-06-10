@@ -13,7 +13,7 @@ end
 
 GLUE.state.RemoveAffliction("prone")
 
-if not inRet() then
+if not inRet() and not curingPaused() then
     send("ql")
     if GLUE.qlTrig then killTrigger(GLUE.qlTrig) end
     GLUE.qlTrig = tempTrigger(GLUE.target.name, function()
