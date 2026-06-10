@@ -134,14 +134,25 @@ end
 
 function GLUE.state.AddAffliction(affliction, addToRoom)
     if addToRoom == nil then addToRoom = true end
-    if affliction == "sensitivity" and GLUE.defenses.Has("deaf") then
-        GLUE.defenses.Set("deaf", false)
-        return false
-    end
+
     if not GLUE.affs.list[affliction] then
         if GLUE.config.debug then
             queueEcho("\n<red>[GLUE]<reset> Unknown affliction: " .. affliction)
         end
+        return false
+    end
+
+    if GLUE.config.echos or GLUE.config.debug then
+        queueEcho("\n<green>[GLUE]<reset> +" .. affColor(affliction) .. affliction .. "<reset>")
+    end
+
+    if GLUE.affQueue and GLUE.affQueue.active then
+        GLUE.affQueue.Queue(function() GLUE.state.AddAffliction(affliction, addToRoom) end)
+        return true
+    end
+    
+    if affliction == "sensitivity" and GLUE.defenses.Has("deaf") then
+        GLUE.defenses.Set("deaf", false)
         return false
     end
 
@@ -151,10 +162,6 @@ function GLUE.state.AddAffliction(affliction, addToRoom)
 
     for _, state in ipairs(GLUE.state.states) do
         state.affs[affliction] = capStack(affliction, (state.affs[affliction] or 0) + 1)
-    end
-
-    if GLUE.config.echos or GLUE.config.debug then
-        queueEcho("\n<green>[GLUE]<reset> +" .. affColor(affliction) .. affliction .. "<reset>")
     end
 
     if GLUE.OnAffGiven then GLUE.OnAffGiven(affliction) end
@@ -282,6 +289,10 @@ end
 
 -- For each state, adds the first affliction from the list that it doesn't already have.
 function GLUE.state.AddSmartAffliction(afflictions)
+    if GLUE.affQueue and GLUE.affQueue.active then
+        GLUE.affQueue.Queue(function() GLUE.state.AddSmartAffliction(afflictions) end)
+        return true
+    end
     if not afflictions or #afflictions == 0 then
         if GLUE.config.debug then
             queueEcho("\n<yellow>[GLUE]<reset> AddSmartAffliction called with empty list")
@@ -300,7 +311,7 @@ function GLUE.state.AddSmartAffliction(afflictions)
         end
     end
 
-    if GLUE.config.debug then
+    if GLUE.config.echos or GLUE.config.debug then
         for aff, _ in pairs(addedAffs) do
             queueEcho("\n<green>[GLUE]<reset> +" .. affColor(aff) .. aff .. "<reset>")
         end

@@ -1,5 +1,45 @@
 [
        {
+              "name": "Attack Parried",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^([\\w'\\-]+) parries the attack with a deft manoeuvre\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
+              "name": "Attack Fumbled",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^You fumble your strike, the attack going wide\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
               "name": "My Balance",
               "isActive": "yes",
               "isFolder": "no",

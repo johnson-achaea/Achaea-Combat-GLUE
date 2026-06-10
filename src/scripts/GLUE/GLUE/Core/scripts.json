@@ -12,7 +12,19 @@
               "isFolder": "no"
        },
        {
+              "name": "AffQueue",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
               "name": "StateManagement",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "MyBalance",
               "isActive": "yes",
               "script": "",
               "isFolder": "no"

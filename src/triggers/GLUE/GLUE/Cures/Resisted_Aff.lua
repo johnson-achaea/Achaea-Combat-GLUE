@@ -24,4 +24,8 @@ for i = #affBuffer, 1, -1 do
     end
 end
 
+-- For queued classes (e.g. Shikudo): aff is still pending, cancel before it reaches HMM.
+-- For direct-add classes: queue is empty, this is a no-op.
+if GLUE.affQueue then GLUE.affQueue.CancelLast() end
+
 GLUE.state.RemoveAffliction(aff)
