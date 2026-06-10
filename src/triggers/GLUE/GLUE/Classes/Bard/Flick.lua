@@ -7,8 +7,7 @@ if pos == "front" then
 elseif pos == "side" then
     GLUE.state.AddAffliction("earworm")
 elseif pos == "back" then
-    GLUE.state.AddAffliction("crescendo")
-    GLUE.state.AddAffliction("earworm")
+    GLUE.state.AddAfflictions({"crescendo", "earworm"})
 end
 
 GLUE.bard.OnHit()

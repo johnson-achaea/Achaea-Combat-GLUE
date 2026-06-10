@@ -171,6 +171,21 @@ function GLUE.state.AddAffliction(affliction, addToRoom)
     return true
 end
 
+function GLUE.state.AddAfflictions(afflictions, addToRoom)
+    if GLUE.affQueue and GLUE.affQueue.active then
+        GLUE.affQueue.Queue(function()
+            for _, aff in ipairs(afflictions) do
+                GLUE.state.AddAffliction(aff, addToRoom)
+            end
+        end)
+        return true
+    end
+    for _, aff in ipairs(afflictions) do
+        GLUE.state.AddAffliction(aff, addToRoom)
+    end
+    return true
+end
+
 function GLUE.state.HasAffliction(affliction)
     local expiresAt = GLUE.state.timedAffs[affliction]
     if expiresAt and os.clock() < expiresAt then return true end

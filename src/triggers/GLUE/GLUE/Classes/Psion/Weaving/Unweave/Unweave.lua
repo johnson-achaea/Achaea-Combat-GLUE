@@ -3,17 +3,19 @@ if GLUE.illusionCheck() then return end
 if not GLUE.IsTarget(matches[2]) then return end
 
 local uwtype = matches[3]
-GLUE.state.AddAffliction("unweaving" .. uwtype)
 GLUE.psion.StartUnweaveTick(uwtype)
 
-if uwtype == "body" then
-    if GLUE.state.HasAffliction("unweavingmind") then
+GLUE.affQueue.Queue(function()
+    GLUE.state.AddAffliction("unweaving" .. uwtype)
+    if uwtype == "body" then
+        if GLUE.state.HasAffliction("unweavingmind") then
+            GLUE.state.AddAffliction("prone")
+        end
+    elseif uwtype == "mind" then
+        if GLUE.state.HasAffliction("unweavingbody") then
+            GLUE.state.AddAffliction("prone")
+        end
+    elseif uwtype == "spirit" then
         GLUE.state.AddAffliction("prone")
     end
-elseif uwtype == "mind" then
-    if GLUE.state.HasAffliction("unweavingbody") then
-        GLUE.state.AddAffliction("prone")
-    end
-elseif uwtype == "spirit" then
-    GLUE.state.AddAffliction("prone")
-end
+end)

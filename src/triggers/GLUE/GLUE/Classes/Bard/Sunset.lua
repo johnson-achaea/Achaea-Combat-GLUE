@@ -4,8 +4,6 @@ if not GLUE or not GLUE.bard then return end
 
 GLUE.limbs.AddHit(GLUE.target.name, matches[2] .. " arm", 20)
 GLUE.limbs.AddHit(GLUE.target.name, "head", 20)
-GLUE.state.AddAffliction("impatience")
-GLUE.state.AddAffliction("stupidity")
-GLUE.state.AddAffliction("slickness")
+GLUE.state.AddAfflictions({"impatience", "stupidity", "slickness"})
 
 GLUE.bard.OnHit()
