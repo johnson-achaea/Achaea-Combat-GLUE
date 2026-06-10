@@ -157,11 +157,11 @@
               "highlightBG": "#ffff00",
               "patterns": [
                      {
-                            "pattern": "^Bracing your feet\\, you drive a twisted oaken staff towards ([\\w'\\-]+)\\.$",
+                            "pattern": "^Bracing your feet\\, you drive a.+ towards ([\\w'\\-]+)\\.$",
                             "type": "regex"
                      }
               ],
-              "script": "Shatter"
+              "script": ""
        },
        {
               "name": "Nervestrike",
