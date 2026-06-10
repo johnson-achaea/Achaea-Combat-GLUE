@@ -5,8 +5,9 @@ GLUE.chase = GLUE.chase or {
     toRoom         = nil,   -- room ID we're trying to chase into
     flying         = true,  -- whether target could be flying (reset each room)
     disabled       = true,  -- set false to enable chasing
-    _handlerID    = nil,
-    _squintDone   = false, -- whether we've already squinted this locate cycle
+    _handlerID        = nil,
+    _playersHandlerID = nil,
+    _squintDone       = false, -- whether we've already squinted this locate cycle
     _squintDir    = nil,   -- direction we squinted
     _squintTempID  = nil,  -- tempTrigger ID watching for target name in squint output
     _squintLines   = {},   -- lines collected during squint window for room-count
@@ -109,7 +110,8 @@ function GLUE.chase.SquintEnd()
         end
         -- Dash immediately rather than waiting for mapper path calculation
         C.toRoom = roomID
-        send("dash " .. dir .. " " .. rooms)
+        GLUE.chase.FoundInDirection(dir)
+        -- send("dash " .. dir .. " " .. rooms)
     else
         GLUE.chase.DoLocate(GLUE.target.name)
     end
@@ -171,6 +173,10 @@ local function onRoomInfo()
 
     -- Navigating to a DoLocate destination — wait until we arrive
     if C.toRoom then
+        if C.fromRoom and C.fromRoom ~= roomNum then
+            C.direction = nil
+            C.fromRoom  = nil
+        end
         if C.toRoom == roomNum then
             C.toRoom = nil
             tempTimer(0, function()
@@ -210,8 +216,22 @@ local function onRoomInfo()
     end
 end
 
+local function onRoomPlayers()
+    if C.disabled then return end
+    if not (GLUE.target and GLUE.target.name) then return end
+    if not GLUE.integration.IsTargetInRoom(GLUE.target.name) then return end
+    C.direction = nil
+    C.fromRoom  = nil
+    C.toRoom    = nil
+    resetLocate()
+    if GLUE.OnChaseUpdated then GLUE.OnChaseUpdated() end
+end
+
 if C._handlerID then killAnonymousEventHandler(C._handlerID) end
 C._handlerID = registerAnonymousEventHandler("gmcp.Room.Info", onRoomInfo)
+
+if C._playersHandlerID then killAnonymousEventHandler(C._playersHandlerID) end
+C._playersHandlerID = registerAnonymousEventHandler("gmcp.Room.Players", onRoomPlayers)
 
 if GLUE.config and GLUE.config.debug then
     cecho("\n<green>[GLUE]<reset> Loaded: Chase")
