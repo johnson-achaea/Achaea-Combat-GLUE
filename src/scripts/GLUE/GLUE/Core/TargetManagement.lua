@@ -11,9 +11,15 @@ GLUE.target = GLUE.target or {}
 function GLUE.target.AdjustVitals(healthDelta, manaDelta)
     if healthDelta and GLUE.target.healthPercent then
         GLUE.target.healthPercent = math.min(1, math.max(0, GLUE.target.healthPercent + healthDelta))
+        if GLUE.target.healthMax then
+            GLUE.target.health = math.floor(GLUE.target.healthPercent * GLUE.target.healthMax)
+        end
     end
     if manaDelta and GLUE.target.manaPercent then
         GLUE.target.manaPercent = math.min(1, math.max(0, GLUE.target.manaPercent + manaDelta))
+        if GLUE.target.manaMax then
+            GLUE.target.mana = math.floor(GLUE.target.manaPercent * GLUE.target.manaMax)
+        end
     end
     if GLUE.UpdateDisplay then GLUE.UpdateDisplay() end
 end

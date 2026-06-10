@@ -64,6 +64,26 @@
               "script": ""
        },
        {
+              "name": "Target Health",
+              "isActive": "yes",
+              "isFolder": "no",
+              "multiline": "no",
+              "multilineDelta": "0",
+              "matchall": "no",
+              "filter": "no",
+              "fireLength": "0",
+              "highlight": "no",
+              "highlightFG": "#ff0000",
+              "highlightBG": "#ffff00",
+              "patterns": [
+                     {
+                            "pattern": "^You glance over ([\\w'\\-]+) and see that \\w+ health is at (\\d+)\\/(\\d+) \\[\\d+%\\]\\.$",
+                            "type": "regex"
+                     }
+              ],
+              "script": ""
+       },
+       {
               "name": "Target Mana",
               "isActive": "yes",
               "isFolder": "no",
