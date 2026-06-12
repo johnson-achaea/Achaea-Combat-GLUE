@@ -100,6 +100,8 @@ function GLUE.Reset()
     -- Assume full mana until the next observe
     GLUE.target.manaPercent = 100
 
+    GLUE.cure.afterHerb = nil
+
     -- Reset all cure balances
     if GLUE.balance and GLUE.balance.ResetAll then
         GLUE.balance.ResetAll()

@@ -46,6 +46,8 @@ function GLUE.target.SetTarget(name)
         pending_restore = nil,
     }}
 
+    GLUE.cure.afterHerb = nil
+
     if GLUE.balance and GLUE.balance.ResetAll then
         GLUE.balance.ResetAll()
     end
