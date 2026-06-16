@@ -10,12 +10,13 @@ local nextLine = multimatches[3][1] or ""
 -- Unweavingspirit fully cured (this message only appears at 0 stacks)
 if string.find(nextLine, "seems suddenly unburdened, clarity reasserting itself upon") then
     GLUE.state.RemoveAffliction("unweavingspirit")
+    GLUE.balance.SetOffBalance("smoke")
+    GLUE.state.PruneStatesWithAffliction("asthma")
     return
-end
-
--- Earworm cured
-if string.find(nextLine, "gives a sigh of relief") then
+elseif string.find(nextLine, "gives a sigh of relief") then
     GLUE.state.RemoveAffliction("earworm")
+    -- GLUE.balance.SetOffBalance("smoke")
+    -- GLUE.state.PruneStatesWithAffliction("asthma")
     return
 end
 
