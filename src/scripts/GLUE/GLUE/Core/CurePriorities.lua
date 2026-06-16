@@ -32,7 +32,7 @@ GLUE.affs.cure_priority = {
         paralysis       = 1, frozen         = 1, shivering      = 1,
         -- Tier 2: stacks (lower priority)
         torntendon      = 2, skullfracture  = 2, wristfracture  = 2, crackedrib     = 2,
-        unweavingmind   = 2, unweavingbody  = 2, melancholic    = 2, choleric       = 2,
+        melancholic     = 2, choleric       = 2,
         phlegmatic      = 2, sanguine       = 2, burning        = 2,
     },
     tree = {
@@ -56,7 +56,7 @@ GLUE.affs.cure_priority = {
         unweavingspirit = 1, shivering      = 1,
         -- Tier 2:  stacks (lower priority)
         torntendon      = 2, skullfracture  = 2, wristfracture  = 2, crackedrib     = 2,
-        unweavingmind   = 2, unweavingbody  = 2, melancholic    = 2, choleric       = 2,
+        melancholic     = 2, choleric       = 2,
         phlegmatic      = 2, sanguine       = 2, burning        = 2,
     },
     expunge = {
