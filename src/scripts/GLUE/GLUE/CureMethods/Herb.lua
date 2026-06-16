@@ -109,6 +109,12 @@ function GLUE.cure.Herb(herbName)
         GLUE.state.Optimize()
     end
 
+    if GLUE.cure.afterHerb then
+        local cb = GLUE.cure.afterHerb
+        GLUE.cure.afterHerb = nil
+        cb()
+    end
+
     if GLUE.UpdateDisplay then GLUE.UpdateDisplay() end
 end
 
