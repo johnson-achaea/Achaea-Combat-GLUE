@@ -53,11 +53,11 @@
               "highlightBG": "#ffff00",
               "patterns": [
                      {
-                            "pattern": "^(?:Weaving )?[Bb]alance used: (.*)s\\.$",
+                            "pattern": "^Balance used: (.*)s\\.$",
                             "type": "regex"
                      },
                      {
-                            "pattern": "^(?:Weaving )?[Ee]quilibrium used: (.*)s\\.$",
+                            "pattern": "^Equilibrium used: (.*)s\\.$",
                             "type": "regex"
                      }
               ],
