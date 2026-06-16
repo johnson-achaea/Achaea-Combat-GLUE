@@ -1,7 +1,7 @@
 GLUE = GLUE or {}
 GLUE.affQueue = GLUE.affQueue or {}
 GLUE.affQueue.pending = {}
-GLUE.affQueue.active  = false
+GLUE.affQueue.active  = true
 
 function GLUE.affQueue.Queue(fn)
     table.insert(GLUE.affQueue.pending, fn)
@@ -20,6 +20,7 @@ function GLUE.affQueue.Flush()
     for _, fn in ipairs(pending) do
         fn()
     end
+    GLUE.affQueue.active = true
 end
 
 if GLUE.config and GLUE.config.debug then
