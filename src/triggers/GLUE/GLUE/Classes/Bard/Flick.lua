@@ -3,11 +3,12 @@ if not GLUE or not GLUE.bard then return end
 
 local pos = GLUE.bard.position
 if pos == "front" then
-    GLUE.state.AddAffliction("crescendo")
+    GLUE.state.EnsureAffliction("crescendo")
 elseif pos == "side" then
-    GLUE.state.AddAffliction("earworm")
+    GLUE.state.EnsureAffliction("earworm")
 elseif pos == "back" then
-    GLUE.state.AddAfflictions({"crescendo", "earworm"})
+    GLUE.state.EnsureAffliction("crescendo")
+    GLUE.state.EnsureAffliction("earworm")
 end
 
 GLUE.bard.OnHit()
