@@ -12,7 +12,11 @@ local function affColor(aff)
 end
 
 local function capStack(aff, count)
-    if GLUE.affs.stackable and GLUE.affs.stackable[aff] then return count end
+    if GLUE.affs.stackable and GLUE.affs.stackable[aff] then
+        local max = GLUE.affs.stackable[aff]
+        if type(max) == "number" then return math.min(count, max) end
+        return count
+    end
     return math.min(count, 1)
 end
 
@@ -184,6 +188,28 @@ function GLUE.state.AddAfflictions(afflictions, addToRoom)
         GLUE.state.AddAffliction(aff, addToRoom)
     end
     return true
+end
+
+-- Like AddAffliction but only adds to states that don't already have the aff.
+-- Use when an attack can deliver an aff the target might already have,
+-- to avoid incorrectly incrementing stack counts.
+function GLUE.state.EnsureAffliction(affliction)
+    if GLUE.affQueue and GLUE.affQueue.active then
+        GLUE.affQueue.Queue(function() GLUE.state.EnsureAffliction(affliction) end)
+        return
+    end
+    local added = false
+    for _, state in ipairs(GLUE.state.states) do
+        if not state.affs[affliction] then
+            state.affs[affliction] = 1
+            added = true
+        end
+    end
+    if added then
+        if #GLUE.state.states > 1 then GLUE.state.Optimize() end
+        if GLUE.UpdateDisplay then GLUE.UpdateDisplay() end
+        if GLUE.OnStateUpdate then GLUE.OnStateUpdate() end
+    end
 end
 
 function GLUE.state.HasAffliction(affliction)
@@ -384,7 +410,14 @@ end
 -- If the aff is in every state (or only one state exists), removes it directly.
 -- Pruning when all states have the aff would empty the state list.
 function GLUE.state.PruneStatesWithAffliction(affliction)
-    if #GLUE.state.states == 1 or GLUE.state.GetProbability(affliction) >= 100 then
+    local allHaveIt = true
+    for _, state in ipairs(GLUE.state.states) do
+        if not state.affs[affliction] then
+            allHaveIt = false
+            break
+        end
+    end
+    if allHaveIt then
         GLUE.state.RemoveAffliction(affliction)
         return
     end
