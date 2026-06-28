@@ -258,22 +258,88 @@ Direct read: `GLUE.defenses.current["shield"]` — boolean.
 
 ## Limb Tracking
 
+Limb damage is tracked as a flat percentage table, separate from the HMM state model. Damage accumulates from hits and resets after 180 seconds (simulating natural healing). Crossing damage thresholds automatically adds or removes the corresponding afflictions from all states.
+
+### Damage Thresholds
+
+| Damage | Limb result | Torso result |
+|--------|-------------|--------------|
+| > 100% | `damaged<limb>` added, `broken<limb>` removed; head also adds `stupidity` | `mildtrauma` added |
+| > 200% | `mangled<limb>` added, `damaged<limb>` removed | `serioustrauma` added, `mildtrauma` removed |
+
+Limb name strings: `"head"`, `"torso"`, `"left arm"`, `"right arm"`, `"left leg"`, `"right leg"`
+
+Affliction names use the limb string with spaces stripped: `"damagedleftleg"`, `"mangledleftarm"`, etc.
+
+### Queries
+
 ```lua
-GLUE.limbs.AddHit(targetName, limb, damage)
--- Increments cumulative damage% for that limb.
--- Auto-adds "damaged" at >100%, "mangled" at >200%.
--- Starts a 180s auto-reset timer (simulates natural healing).
+GLUE.limbs.GetDamage(targetName, limb)
+-- Returns cumulative damage% (0 if untracked). Number.
 
-GLUE.limbs.ResetLimb(targetName, limb)
--- Called by the auto-timer or a restoration cure; downgrades affliction.
-
-GLUE.limbs.HandleRestorationCure(targetName, area)
--- Called after restoration's 4s balance; downgrades one limb in the area.
-
-GLUE.limbs.damage[targetName][limb]  -- Flat damage% value
+GLUE.limbs.IsBroken(targetName, limb)
+-- Returns true if damage > 100% (i.e. damaged or mangled).
 ```
 
-Limb strings: `"head"`, `"torso"`, `"left arm"`, `"right arm"`, `"left leg"`, `"right leg"`
+### Modifications
+
+```lua
+GLUE.limbs.AddHit(targetName, limb, amount)
+-- Adds amount to the limb's damage%. Fires threshold afflictions if a boundary is crossed.
+-- Resets the 180s auto-reset timer for this limb.
+-- amount: flat damage percentage (e.g. 15 for a standard hit)
+
+GLUE.limbs.ResetLimb(targetName, limb)
+-- Downgrades limb by one threshold step:
+--   mangled → damaged (damage set to 100.1)
+--   damaged → 0 (affliction removed)
+-- Called by the 180s timer and by restoration cure handlers.
+
+GLUE.limbs.ResetAll(targetName)
+-- Clears all damage and kills all timers for the given target.
+-- Called automatically on target switch.
+
+GLUE.limbs.HandleRestorationCure(targetName, area)
+-- Downgrades one limb in the given area after restoration's 4s balance completes.
+-- area: "head", "torso" / "body", "arms" (left before right), "legs" (left before right)
+-- Only one limb is affected per call.
+```
+
+### Timer Persistence (target switching)
+
+Limb reset timers survive short target switches (< 3 minutes).
+
+```lua
+GLUE.limbs.GetTimerData(targetName)
+-- Returns {limb = {startTime = timestamp}} for all active timers.
+-- Use before switching targets to save timer state.
+
+GLUE.limbs.RestoreTimers(targetName, timerData)
+-- Re-arms timers using saved startTime values. Timers with < 0s remaining are dropped.
+-- Use when switching back to a target whose timers were saved.
+
+GLUE.limbs.CancelTimers(targetName)
+-- Kills all active timers without resetting damage values.
+-- Use when switching away from a target temporarily.
+```
+
+### Seeding from Study/Probe
+
+The `Study Limb` trigger fires on limb health output (e.g., `study` or `probe`) and seeds `GLUE.limbs.damage[name][limb]` directly, bypassing the threshold logic. This gives an accurate starting point when engaging a target with pre-existing limb damage.
+
+### Integration Example
+
+```lua
+-- In your attack handler: only target a leg if it is near-broken but not yet mangled
+function limbReady(limb)
+    local v = GLUE.limbs.GetDamage(target, limb) or 0
+    return v > 80 and v < 100
+end
+
+if limbReady("left leg") then
+    -- hamstring for the break
+end
+```
 
 ---
 
