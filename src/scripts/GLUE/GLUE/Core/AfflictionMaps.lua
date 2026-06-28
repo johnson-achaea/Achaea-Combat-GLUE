@@ -168,7 +168,7 @@ GLUE.affs.stackable = {
     wristfracture  = true,
     crackedrib     = true,
     pressure       = true,
-    crescendo      = true,
+    crescendo      = 6,
     earworm        = true,
 }
 

@@ -31,9 +31,8 @@ local DECAY_K       = 0.5  -- exp decay rate: penalty = exp(-DECAY_K * overtime)
 local MEND_BAL      = 0.8  -- mend salve balance duration (seconds)
 local RESTORE_BAL   = 3.8  -- restoration salve balance duration (seconds)
 
--- Salve is applied manually and the balance window is very short (0.8s), so legitimate
--- gaps between applies are common. Use a wider grace window before penalizing to avoid
--- false positives from normal curing rhythm.
+-- Salve can been applied manually and the balance window varies, so legitimate
+-- gaps between applies are common. Use a wider grace window before penalizing.
 local SALVE_GRACE   = GRACE * 2
 
 -- Beyond this age, salve_time/restore_time are too stale to be meaningful — we may have
@@ -69,6 +68,9 @@ local function buildTables()
     end
     for _, aff in ipairs(GLUE.affs.focus) do mark(aff, "focus") end
     for _, aff in ipairs(GLUE.affs.smoke) do mark(aff, "smoke") end
+    -- unweavingspirit is decremented by smoke (handled separately in Smoke.lua),
+    -- so it isn't in GLUE.affs.smoke but should still attract the Rule D penalty.
+    mark("unweavingspirit", "smoke")
 
     -- Salve (shared balance): all non-position-marker affs from salve tables + restore_list.
     local positionMarkers = { torso = true, head = true }
